@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Laravel</title>
+
+    <!-- Fonts -->
+    <!--<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel='stylesheet' type='text/css'>-->
+    <!--<link href="http://fonts.useso.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>-->
+
+    <!-- head 中 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="css/demos.css">
+    <style>
+        body {
+            font-family: 'Lato';
+        }
+
+        .fa-btn {
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body id="app-layout" ontouchstart>
+
+
+<div class="weui-tab">
+    <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div style="margin-bottom:53px">
+                <header class='demos-header'>
+                    <h1 class="demos-title">Panel</h1>
+                </header>
+                <div class="page__bd">
+                    <div class="weui-panel weui-panel_access">
+                        <div class="weui-panel__hd">图文组合列表</div>
+                        <div class="weui-panel__bd" id="xpp_article_list">
+                            <div class="weui-loadmore" id="xpp_loadmore">
+                                <i class="weui-loading"></i>
+                                <span class="weui-loadmore__tips">正在加载</span>
+                            </div>
+                            <div class="weui-loadmore weui-loadmore_line" style="display:none;">
+                                <span class="weui-loadmore__tips">暂无数据</span>
+                            </div>
+                        </div>
+                        <div class="weui-panel__ft">
+                            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                                <div class="weui-cell__bd">查看更多</div>
+                                <span class="weui-cell__ft"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+            <h1>页面二</h1>
+        </div>
+        <div id="tab3" class="weui-tab__bd-item">
+            <h1>页面三</h1>
+        </div>
+        <div id="tab4" class="weui-tab__bd-item">
+            <h1>页面四</h1>
+        </div>
+    </div>
+
+    <div class="weui-tabbar">
+        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+            <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">微信</p>
+        </a>
+        <a href="#tab2" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">通讯录</p>
+        </a>
+        <a href="#tab3" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发现</p>
+        </a>
+        <a href="#tab4" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我</p>
+        </a>
+    </div>
+</div>
+
+<!-- body 最后 -->
+<script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/swiper.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
+<script>
+    $(function () {
+        console.log(1);
+
+        ajaxExt.get('/article', function($result){
+            $('#xpp_loadmore').attr('style', 'display:none;');
+            console.log("请求成功，JSON解析后的响应数据为:",result);
+            var data = result.data;
+            for (var i=0;i<data.length;i++){
+                var html =
+                    '<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">'+
+                    '<div class="weui-media-box__hd">'+
+                    '<img class="weui-media-box__thumb" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">'+
+                    '</div>'+
+                    '<div class="weui-media-box__bd">'+
+                    '<h4 class="weui-media-box__title">'+data[i]['title']+'</h4>'+
+                    '<p class="weui-media-box__desc">'+data[i]['description']+'</p>'+
+                    '<ul class="weui-media-box__info">'+
+                    '<li class="weui-media-box__info__meta">文字来源</li>'+
+                    '<li class="weui-media-box__info__meta">时间</li>'+
+                    '<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</li>'+
+                    '</ul>'+
+                    '</div>'+
+                    ' </a>';
+                $('#xpp_article_list').append(html);
+            }
+        });
+
+//        function status(response){
+//            console.log(response.status);
+//            if(response.status>=200 && response.status<300){
+//                return Promise.resolve(response);
+//            }
+//            else{
+//                return Promise.reject(new Error(response.statusText));
+//            }
+//        }
+//        function json(response){
+//            return response.json();
+//        }
+//        fetch('/article')
+//            .then(status)
+//            .then(json)
+//            .then(function(result){
+//                $('#xpp_loadmore').attr('style', 'display:none;');
+//                console.log("请求成功，JSON解析后的响应数据为:",result);
+//                var data = result.data;
+//                for (var i=0;i<data.length;i++){
+//                    var html =
+//                        '<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">'+
+//                            '<div class="weui-media-box__hd">'+
+//                                '<img class="weui-media-box__thumb" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">'+
+//                            '</div>'+
+//                            '<div class="weui-media-box__bd">'+
+//                                '<h4 class="weui-media-box__title">'+data[i]['title']+'</h4>'+
+//                                '<p class="weui-media-box__desc">'+data[i]['description']+'</p>'+
+//                        '<ul class="weui-media-box__info">'+
+//                    '<li class="weui-media-box__info__meta">文字来源</li>'+
+//                    '<li class="weui-media-box__info__meta">时间</li>'+
+//                    '<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</li>'+
+//                    '</ul>'+
+//                            '</div>'+
+//                        ' </a>';
+//                    $('#xpp_article_list').append(html);
+////                    var a = document.createElement('a'); //1、创建元素
+////                    a.setAttribute("href","javascript:void(0);");
+////                    a.setAttribute("class", "weui-media-box weui-media-box_appmsg")
+////                    a.innerHTML=html;
+////                    var container = document.getElementById('xpp_article_list'); //2、找到父级元素
+////                    container.appendChild(a); //3、在末尾中添加元素
+//                }
+//            })
+//            .catch(function(err){
+//                console.log("Fetch错误:"+err);
+//            });
+    })
+
+
+
+</script>
+</body>
+</html>

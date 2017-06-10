@@ -1,0 +1,11 @@
+*.buildpath
+*.project
+/.settings/
+/.idea
+/.env
+/node_modules
+/public/storage
+/storage/*.key
+Homestead.json
+Homestead.yaml
+.env
