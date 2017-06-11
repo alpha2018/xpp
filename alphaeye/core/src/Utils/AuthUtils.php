@@ -59,6 +59,11 @@ class AuthUtils
         return $value;
     }
 
+    protected function getAuthCache($token)
+    {
+        return $valu = $this->cache->get($this->getCacheKey($token));
+    }
+
     protected function getCacheMinutes()
     {
         return $refresh_ttl = config('jwt.refresh_ttl');
@@ -75,17 +80,18 @@ class AuthUtils
         $token = $this->JWTAuth->fromUser($user);
         $this->setAuthCache($token, $user, $request);
 
-        $valu = $this->cache->get($this->getCacheKey($token));
-
-        $usr = $this->JWTAuth->toUser($token);
-        dd($token, $usr, $valu);
         return $token;
     }
 
     public function check($token)
     {
         $user = $this->JWTAuth->toUser($token);
-        $valu = $this->cache->get($this->getCacheKey($token));
+        $valu  = $this->getAuthCache($token);
+        if(empty($user)){
+            return false;
+        }
+
+        return true;
     }
 
     public function setUser()

@@ -38,14 +38,7 @@
             //processData: false,
             success: function (result) {
                 console.log("请求成功，JSON解析后的响应数据为:", result);
-                if (!result.success) {
-                    return $.toast(result.msg, "cancel");
-                }
-                $.toast("保存成功", function () {
-                    func(result);
-                });
-
-                return true;
+                func(result);
             },
             error: function (xhr, type) {
                 alert('Ajax error!')

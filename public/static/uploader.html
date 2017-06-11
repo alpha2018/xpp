@@ -243,33 +243,15 @@
                 $.toptip('请选择上课日期');
                 return false;
             }
-            console.log('保存');
+            //console.log('保存');
             var data = formExt.obj($('#xpp_article_form'))
-            console.log(data)
+            //console.log(data)
             ajaxExt.post('/article', data, function (result) {
-                console.log(result);
+                if (!result.success) {
+                    return $.toast(result.msg, "cancel");
+                }
+                $.toast("保存成功", function () {});
             })
-//            $.ajax({
-//                url: "/article",
-//                type: 'POST',
-//                data: data,
-//                //contentType: false,
-//                //processData: false,
-//                success: function (result) {
-//                    console.log("请求成功，JSON解析后的响应数据为:", result);
-//                    if (!result.success) {
-//                        return $.toast(result.msg, "cancel");
-//                    }
-//                    $.toast("保存成功", function () {
-//                        //console.log('close');
-//                    });
-//
-//                    return true;
-//                },
-//                error: function (xhr, type) {
-//                    alert('Ajax error!')
-//                }
-//            });
         });
     })
 

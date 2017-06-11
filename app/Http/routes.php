@@ -20,8 +20,11 @@ Route::get('/', function (){
 //    $token = app(\AlphaEyeCore\Utils\AuthUtils::class)->setToken($user, request());
 //    dd($user, $token);
 //});
-Route::any('article/image/preview/{id}', 'Xpp\\ArticleController@getImagePreview');
-Route::any('article/image/{id}/{width}', 'Xpp\\ArticleController@getImage');
+Route::any('auth/login', 'Auth\\LoginController@postLogin');
+Route::any('auth/check', 'Auth\\LoginController@postCheckToken');
+
+Route::get('article/image/preview/{id}', 'Xpp\\ArticleController@getImagePreview');
+Route::get('article/image/{id}/{width}', 'Xpp\\ArticleController@getImage');
 
 Route::any('article/upload', 'Xpp\\ArticleController@upload');
 Route::resource('article', 'Xpp\\ArticleController');

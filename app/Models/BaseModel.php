@@ -5,6 +5,20 @@ use Illuminate\Database\Eloquent\Model;
 class BaseModel extends Model
 {
     /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table;
+
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -24,4 +38,18 @@ class BaseModel extends Model
      * @var string
      */
     protected $dateFormat = 'U';
+
+    /**
+     * The attributes that are mass assignable .
+     *
+     * @var array
+     */
+    protected $fillable = [];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [];
 }

@@ -8,9 +8,6 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Lang;
-use Libs\Utils\ValidateUtil;
 use App\models\User;
 
 class AuthController extends Controller
@@ -90,7 +87,7 @@ class AuthController extends Controller
         if (view()->exists('auth.authenticate')) {
             return view('auth.authenticate');
         }
-    
+
         return view('auth.login');
     }
 
@@ -165,8 +162,6 @@ class AuthController extends Controller
         $messages = [
             $this->loginUsername().'.required' => '账号必须',
             'password.required' => '密码必须',
-            'captcha.required' => '验证码必须',
-            'captcha.captcha' => '验证码错误'
         ];
         
         $this->validate($request, [
@@ -260,7 +255,7 @@ class AuthController extends Controller
     {
         $this->redirectPath = $request->fullUrl();
     }
-    
+
     /**
      * 注册验证邮箱
      * @param Request $request
@@ -269,7 +264,7 @@ class AuthController extends Controller
     {
         return response()->json($this->validateEmail($request));
     }
-    
+
     /**
      * 验证邮箱
      * @param Request $request
@@ -280,12 +275,12 @@ class AuthController extends Controller
         if(!ValidateUtil::isEmail($email)){
             return ['code'=>500, 'msg'=>'邮箱格式不正确'];
         }
-        
+
         $ret = true;        //验证邮箱是否注册
         if(!$ret){
             return ['code'=>500, 'msg'=>'邮箱已经注册'];
         }
-        
+
         return ['code'=>200, 'msg'=>''];
     }
 }
