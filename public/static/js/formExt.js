@@ -63,7 +63,7 @@
                 func(result);
             },
             error: function (xhr, type) {
-                alert('Ajax error!')
+                $.toast("获取列表失败", 'cancel');
             }
         });
     }
