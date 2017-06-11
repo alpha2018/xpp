@@ -31,33 +31,11 @@
 <header class='demos-header'>
     <h1 class="demos-title">Article</h1>
 </header>
-<article class="weui-article">
-    <h1>大标题</h1>
-    <section>
-        <h2 class="title">章标题</h2>
-        <section>
-            <h3>1.1 节标题</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-            </p>
-            <p>
-                <img src="./images/pic_article.png" alt="">
-                <img src="./images/pic_article.png" alt="">
-            </p>
-        </section>
-        <section>
-            <h3>1.2 节标题</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </section>
-    </section>
+<article class="weui-article" id="xpp_article_content">
+
+
+
+
 </article>
 
     <!-- body 最后 -->
@@ -71,8 +49,7 @@
     <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
 
     <!-- 如果使用了某些拓展插件还需要额外的JS -->
-    <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/swiper.min.js"></script>
-    <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
+    <script src="js/formExt.js"></script>
 
     <script>
         $(function () {
@@ -93,15 +70,38 @@
 
             var args = new Object();
             args = GetUrlParms();
-            var articleId = window.location.search;
             //如果要查找参数key:
-
             if(args['article_id']!=undefined) {
                 //如果要查找参数key:
-                var value1 = args['article_id'];
-                alert(value1);
+                var articleId = args['article_id'];
+                console.log(articleId)
+                ajaxExt.get('/article/'+articleId, function (data) {
+                    var result = data.result;
+                    var html = '<h3>'+result.title+'</h3>'+
+                    '<ul class="weui-media-box__info" style="margin-bottom: 10px">'+
+                    '<li class="weui-media-box__info__meta">文字来源</li>'+
+                    '<li class="weui-media-box__info__meta">'+result.category_name+'</li>'+
+                    '<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">'+result.class_date+'</li>'+
+                    '</ul>'+
+                    '<section>'+
+                    '<p>'+
+                    result.description+
+                    '</p>'+
+                    '<p>';
+                    console.log(result.image_list)
+                    for(var i=0;i<result.image_list.length;i++){
+                        html += '<img src="'+result.image_list[i]+'" alt="">';
+                    }
+                    html +=
+                    '</p>'+
+                    '</section>';
+
+                    $('#xpp_article_content').append(html);
+                })
             }
             console.log(args)
+
+
         })
 
 

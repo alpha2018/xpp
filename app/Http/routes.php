@@ -21,6 +21,8 @@ Route::get('/', function (){
 //    dd($user, $token);
 //});
 Route::any('article/image/preview/{id}', 'Xpp\\ArticleController@getImagePreview');
+Route::any('article/image/{id}/{width}', 'Xpp\\ArticleController@getImage');
+
 Route::any('article/upload', 'Xpp\\ArticleController@upload');
 Route::resource('article', 'Xpp\\ArticleController');
 

@@ -63,7 +63,7 @@
                 func(result);
             },
             error: function (xhr, type) {
-                $.toast("获取列表失败", 'cancel');
+                $.toast("获取数据失败", 'cancel');
             }
         });
     }

@@ -17,6 +17,32 @@ class ArticleController extends Controller
         $this->article = $article->ofType($this->articleTypeId);
     }
 
+    public function getImage($id, $width)
+    {
+        $file = File::find($id);
+        if(empty($file)){
+            return response('404 Not Found', 404);
+        }
+
+        $binary = $file->binary_long_blob;
+
+        $img = Image::make($binary);
+
+        if($width == 0 || $width > 690){
+            $width = 690;
+        }
+
+        $img = $img->resize($width, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        return $img->response('jpg');
+
+        $img = Image::make($binary)->resize(300, 200);
+        return $img->response('jpg');
+
+        return response($binary)->header('Content-type',$file->mime_type);
+    }
+
     public function getImagePreview($id)
     {
         $file = File::find($id);
@@ -160,7 +186,26 @@ class ArticleController extends Controller
     public function show($id)
     {
         //
-        return 1;
+        $article = $this->article->ofStatus()->where('id', '=', $id)->first();
+        if(empty($article)){
+            return response('404 Not Found', 404);
+        }
+        $catId= $article->category_id;
+        if($catId == 1){
+            $article->category_name = '国画';
+        }elseif($catId == 2){
+            $article->category_name = '儿童画';
+        }else{
+            $article->category_name = '无';
+        }
+        $images = $article->images;
+        $imageArr = array_values(array_filter(explode(',', $images)));
+        $imageList = array_map(function ($v){
+            $v = '/article/image/1/690';
+            return $v;
+        }, $imageArr);
+        $article->image_list = $imageList;
+        return response()->json(['success'=>true, 'result'=>$article]);
     }
 
     /**
