@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>小爬爬美术</title>
 
     <!-- Fonts -->
     <!--<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel='stylesheet' type='text/css'>-->
@@ -42,7 +42,7 @@
                                 <i class="weui-loading"></i>
                                 <span class="weui-loadmore__tips">正在加载</span>
                             </div>
-                            <div class="weui-loadmore weui-loadmore_line" style="display:none;">
+                            <div class="weui-loadmore weui-loadmore_line" id="xpp_loadmore_none" style="display:none;">
                                 <span class="weui-loadmore__tips">暂无数据</span>
                             </div>
                         </div>
@@ -118,6 +118,10 @@
             $('#xpp_loadmore').attr('style', 'display:none;');
             console.log("请求成功，JSON解析后的响应数据为:",result);
             var data = result.data;
+            if(data.length == 0){
+                $('#xpp_loadmore_none').attr('style', '');
+                return false;
+            }
             for (var i=0;i<data.length;i++){
                 var html =
                     '<a href="'+data[i]['a_href']+'" class="weui-media-box weui-media-box_appmsg">'+
