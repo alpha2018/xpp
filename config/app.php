@@ -149,7 +149,7 @@ return [
         /*
          * 
          */
-        //Intervention\Image\ImageServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         //Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         //\AlphaEyeCore\LHttp\LProviders\CoreServiceProvider::class,
     ],

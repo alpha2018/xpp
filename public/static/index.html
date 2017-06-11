@@ -46,12 +46,12 @@
                                 <span class="weui-loadmore__tips">暂无数据</span>
                             </div>
                         </div>
-                        <div class="weui-panel__ft">
-                            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
-                                <div class="weui-cell__bd">查看更多</div>
-                                <span class="weui-cell__ft"></span>
-                            </a>
-                        </div>
+                        <!--<div class="weui-panel__ft">-->
+                            <!--<a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">-->
+                                <!--<div class="weui-cell__bd">查看更多</div>-->
+                                <!--<span class="weui-cell__ft"></span>-->
+                            <!--</a>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
@@ -68,26 +68,26 @@
     </div>
 
     <div class="weui-tabbar">
-        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+        <a href="#tab1" class="weui-tabbar__item">
             <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
-            <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_button.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">微信</p>
-        </a>
-        <a href="#tab2" class="weui-tabbar__item">
-            <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_msg.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">通讯录</p>
-        </a>
-        <a href="#tab3" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
                 <img src="./images/icon_nav_article.png" alt="">
             </div>
             <p class="weui-tabbar__label">发现</p>
         </a>
-        <a href="#tab4" class="weui-tabbar__item">
+        <a href="javascript:void(0)" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">收藏</p>
+        </a>
+        <a href="javascript:void(0)" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">通讯录</p>
+        </a>
+        <a href="javascript:void(0)" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
                 <img src="./images/icon_nav_cell.png" alt="">
             </div>
@@ -120,7 +120,7 @@
             var data = result.data;
             for (var i=0;i<data.length;i++){
                 var html =
-                    '<a href="'+data[i]['']+'" class="weui-media-box weui-media-box_appmsg">'+
+                    '<a href="'+data[i]['a_href']+'" class="weui-media-box weui-media-box_appmsg">'+
                     '<div class="weui-media-box__hd">'+
                     '<img class="weui-media-box__thumb" src="'+data[i]['thumb']+'" alt="">'+
                     '</div>'+

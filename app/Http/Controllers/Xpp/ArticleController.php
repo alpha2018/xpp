@@ -17,9 +17,9 @@ class ArticleController extends Controller
         $this->article = $article->ofType($this->articleTypeId);
     }
 
-    public function getImagePreview($name)
+    public function getImagePreview($id)
     {
-        $file = File::find(46);
+        $file = File::find($id);
         if(!count($file)){
             return response()->json(['success'=>false, 'status_code'=>500]);
         }
@@ -95,7 +95,8 @@ class ArticleController extends Controller
                 $thumb = '/static/images/pic_160.png';
             }
             $article->thumb = $thumb;
-            $article->a_href = '/static/article.html?article_id='.$article->id.'';
+            $articleId = $article->id;
+            $article->a_href = '/static/article.html?article_id='.$articleId;
         }
         return $articles;
     }
