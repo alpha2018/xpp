@@ -1,0 +1,22 @@
+id,user_id,category_id,"slug","title",status,"description","subtitle","content",view_count,published_at,created_at,updated_at,deleted_at,article_type_id,"images","class_date"
+1,NULL,NULL,"12","Sample blog post",0,"",NULL,"This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
+
+Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
+
+Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",0,0,NULL,NULL,NULL,1,"",NULL
+2,NULL,NULL,"123","Heading",0,"",NULL,"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",0,0,NULL,NULL,NULL,1,"",NULL
+3,NULL,NULL,"标题一","标题一",0,"由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。",NULL,"由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。",0,0,NULL,NULL,NULL,1,"",NULL
+4,NULL,NULL,"1234","Sub-heading",0,"",NULL,"Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.",0,0,NULL,NULL,NULL,1,"",NULL
+5,NULL,1,"1231231","13123",1,"13123",NULL,"",0,0,1497074082,1497074082,NULL,0,",74",NULL
+9,NULL,1,"1111","秀恩爱åçhi",1,"12312313123123",NULL,"",0,0,1497074683,1497074683,NULL,0,",75",NULL
+10,NULL,1,"4fbe7402ffe0495d35738fa2caf8bcb8","qwwq",1,"qwq",NULL,"",0,0,1497074755,1497074755,NULL,0,",76",NULL
+12,NULL,1,"c97f89215ef0a5077bda4a828852a62a","qwwq",1,"qwq",NULL,"",0,0,1497074894,1497074894,NULL,0,",76",NULL
+16,NULL,1,"0a58b91bc043fc728dfc563f98185e49","qwwq",1,"qwq",NULL,"",0,0,1497075092,1497075092,NULL,1,",76",NULL
+17,NULL,1,"97f2f32e8767f4ae4ba831343b00b684","",1,"",NULL,"",0,0,1497076130,1497076130,NULL,1,",77",NULL
+18,NULL,1,"718d300d17ec01ede9cfb0cec02f989b","123123",1,"123123123",NULL,"",0,0,1497076615,1497076615,NULL,1,",78",NULL
+19,NULL,1,"f3f0dfe20a2d73451a0fd7ff807e1b03","123123",1,"123123123",NULL,"",0,0,1497076671,1497076671,NULL,1,"78",NULL
+20,NULL,1,"2c789ebcb571076d4e05c9a9c59e228e","121",1,"1212",NULL,"",0,0,1497078224,1497078224,NULL,1,"79",NULL
+21,NULL,1,"376da31e029305b83a1d09b8882be600","1231",1,"123123",NULL,"",0,0,1497078278,1497078278,NULL,1,"80",NULL
+22,NULL,1,"716745aca6ee20aea70d0576bf0de361","123",1,"2312",NULL,"",0,0,1497078930,1497078930,NULL,1,"81",NULL

@@ -1,0 +1,6 @@
+"migration",batch
+"2014_10_12_000000_create_users_table",1
+"2014_10_12_100000_create_password_resets_table",1
+"2016_06_08_054235_create_tags_table",1
+"2016_06_08_054414_create_post_tag_pivot",1
+"2016_06_08_060953_create_posts_table",1

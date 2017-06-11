@@ -1,0 +1,10 @@
+id,user_id,category_id,"slug","title","subtitle","content",view_count,"published_at","created_at","updated_at","deleted_at"
+1,NULL,NULL,"12","Sample blog post",NULL,"This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
+
+Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
+
+Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",NULL,"0000-00-00 00:00:00",NULL,NULL,NULL
+2,NULL,NULL,"123","Heading",NULL,"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",NULL,"0000-00-00 00:00:00",NULL,NULL,NULL
+4,NULL,NULL,"1234","Sub-heading",NULL,"Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.",NULL,"0000-00-00 00:00:00",NULL,NULL,NULL
