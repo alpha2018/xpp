@@ -201,7 +201,7 @@ class ArticleController extends Controller
         $images = $article->images;
         $imageArr = array_values(array_filter(explode(',', $images)));
         $imageList = array_map(function ($v){
-            $v = '/article/image/1/690';
+            $v = '/article/image/'.$v.'/690';
             return $v;
         }, $imageArr);
         $article->image_list = $imageList;
