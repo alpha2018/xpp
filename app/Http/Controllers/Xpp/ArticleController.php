@@ -20,8 +20,8 @@ class ArticleController extends Controller
     public function getImagePreview($id)
     {
         $file = File::find($id);
-        if(!count($file)){
-            return response()->json(['success'=>false, 'status_code'=>500]);
+        if(empty($file)){
+            return response('404 Not Found', 404);
         }
 
         $binary = $file->binary_long_blob;
@@ -83,7 +83,7 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $articles = $this->article->paginate(20);
+        $articles = $this->article->ofStatus()->paginate(20);
 
         foreach ($articles as $article){
             $images = $article->images;
