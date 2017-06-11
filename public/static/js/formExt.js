@@ -52,4 +52,19 @@
             }
         });
     }
+    ajaxExt.get=function(url, func) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            //data: data,
+            //contentType: false,
+            //processData: false,
+            success: function (result) {
+                func(result);
+            },
+            error: function (xhr, type) {
+                alert('Ajax error!')
+            }
+        });
+    }
 })(jQuery);
