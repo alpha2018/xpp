@@ -1,2 +1,0 @@
-id,"name","avatar","nickname",status,type,"email","password","remember_token",email_notify_enabled,created_at,updated_at,deleted_at,is_admin
-1,"1234",NULL,"1234",NULL,NULL,"1234@qq.com","$2y$10$MOVnF74bu2u2SsNDd3F.Sux8s3Fy04SJpN33WDoDsrO3yLuXGdPwm","",NULL,NULL,NULL,NULL,1
