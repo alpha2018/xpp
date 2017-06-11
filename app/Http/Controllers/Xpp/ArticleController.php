@@ -86,11 +86,17 @@ class ArticleController extends Controller
         $articles = $this->article->paginate(20);
 
         foreach ($articles as $article){
-            $article->thumb = '/article/image/preview/1';
+            $images = $article->images;
+            $imageArr = explode(',', $images);
+            $imageArr = array_values(array_filter($imageArr));
+            if (count($imageArr) > 0){
+                $thumb = '/article/image/preview/'.$imageArr['0'];
+            }else{
+                $thumb = '/static/images/pic_160.png';
+            }
+            $article->thumb = $thumb;
             $article->a_href = '/static/article.html?article_id='.$article->id.'';
         }
-        //return response(1,500);
-
         return $articles;
     }
 
@@ -123,6 +129,7 @@ class ArticleController extends Controller
 
         $article = $this->article->where('images', '=', $images)
             ->first();
+
         if(!empty($article)){
             return response(['success'=>false, 'msg'=>'重复提交', 'status'=>500]);
         }
