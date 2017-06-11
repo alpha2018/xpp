@@ -153,7 +153,7 @@ class ArticleController extends Controller
         $description = $request->input('description');
         $images = trim($request->input('images'), ',');
         $categoryId = $request->input('category_id');
-        $classDate = $request->input('class_date');
+        $class_date = $request->input('category_id');
 
         $article = $this->article->where('images', '=', $images)
             ->first();
@@ -170,7 +170,6 @@ class ArticleController extends Controller
             $article->category_id = $categoryId;
             $article->images = $images;
             $article->article_type_id = $this->articleTypeId;
-            $article->class_date = $classDate;
             $article->save();
         }catch (QueryException $e){
             return response(['success'=>false, 'msg'=>'重复提交', 'status'=>500]);
