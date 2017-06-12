@@ -131,9 +131,9 @@ return [
         'default' => [
             'host'     => env('REDIS_HOST','redis.duapp.com'),
             'port'     => env('REDIS_PORT',80),
-            'database' => env('REDIS_DATABASE','WBVhWTVVHuesvzynxiCC'),
+            //'database' => env('REDIS_DATABASE','ZMAePPlTYruMGUAlBhKk'),
 
-            'password' => env('REDIS_PASSWORD', '23835d42e53643619f50c2afa7dcaf83-63fe5ee08a94434e98d2ac020ae4b0bc-WBVhWTVVHuesvzynxiCC')
+            'password' => env('REDIS_PASSWORD', '23835d42e53643619f50c2afa7dcaf83-63fe5ee08a94434e98d2ac020ae4b0bc-ZMAePPlTYruMGUAlBhKk')
         ],
 
     ],
