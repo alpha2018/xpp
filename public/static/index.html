@@ -62,20 +62,65 @@
         <div id="tab3" class="weui-tab__bd-item">
             <h1>页面三</h1>
         </div>
-        <div id="tab4" class="weui-tab__bd-item">
-            <h1>页面四</h1>
+        <div id="tab4" class="weui-tab__bd-item" style="display: none">
+            <header class='demos-header'>
+                <h1 class="demos-title">我的</h1>
+            </header>
+
+            <div class="weui-cells__title">新消息提示跟摘要信息后，统一在列表右侧</div>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <a class="" href="uploader.html" style="color: #888;text-decoration: none;">发表文章</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui-cells__title">未读数红点跟在主题信息后，统一在列表左侧</div>
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                        <img src="images/pic_160.png" style="width: 50px;display: block">
+                        <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>联系人名称</p>
+                        <p style="font-size: 13px;color: #888888;">摘要信息</p>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <span style="vertical-align: middle">单行列表</span>
+                        <span class="weui-badge" style="margin-left: 5px;">8</span>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </div>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <span style="vertical-align: middle">单行列表</span>
+                        <span class="weui-badge" style="margin-left: 5px;">8</span>
+                    </div>
+                    <div class="weui-cell__ft">详细信息</div>
+                </div>
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <span style="vertical-align: middle">单行列表</span>
+                        <span class="weui-badge" style="margin-left: 5px;">New</span>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="weui-tabbar">
-        <a href="#tab1" class="weui-tabbar__item">
-            <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+        <a href="#tab1" class="weui-tabbar__item  weui-bar__item--on">
             <div class="weui-tabbar__icon">
                 <img src="./images/icon_nav_article.png" alt="">
             </div>
             <p class="weui-tabbar__label">发现</p>
         </a>
-        <a href="javascript:void(0)" class="weui-tabbar__item weui-bar__item--on">
+        <a href="javascript:void(0)" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
                 <img src="./images/icon_nav_button.png" alt="">
             </div>
@@ -140,48 +185,20 @@
                 $('#xpp_article_list').append(html);
             }
         });
-        function login() {
-            //token认证
-           // ajaxExt.post('/auth/check', {}, function (data) {
-                //if(!data.success){
-                    //如果参数过多，建议通过 object 方式传入
-                    console.log(11111)
-                    $.login({
-                        title: '登陆',
-                        text: '请输入用户名和密码',
-                        username: '',  // 默认用户名
-                        password: '',  // 默认密码
-                        onOK: function (username, password) {
-                            //点击确认
-                            //请求登录认证
-                            ajaxExt.post('/auth/login', {username:username, password:password}, function (data) {
-                                var result = data.result;
-                                console.log(1);
-                                if(!data.success){
-                                    console.log(2);
-                                    login();
-                                    $.toptip('账号密码错误', 'error');
 
-                                }else {
-                                    $.cookie('jwt-token', data.result.token, { expires: 7, path: '/' });
-                                    console.log(data)
-                                }
-                            })
-                            console.log(username, password)
-                        },
-                        onCancel: function () {
-                            //点击取消
-                        }
-                    });
-               // }
-            //});
+        function loginSuccess() {
+            $('#tab4').attr('style', '');
         }
 
         $('#xpp_me').click(function(){
             var token = $.cookie('jwt-token');
-            console.log(token);
+//            console.log(token);
             if(!token){
-                login()
+                AuthExt.login(function () {
+                    loginSuccess();
+                })
+            }else {
+                loginSuccess();
             }
         });
     })

@@ -27,16 +27,32 @@
 </head>
 <body id="app-layout" ontouchstart>
 
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item" href="javascript:window.history.back();">
+            返回
+        </a>
+        <a class="weui-navbar__item  weui-bar__item--on" href="javascript:void(0)">
+            文章
+        </a>
+        <a class="weui-navbar__item" href="javascript:void(0)">
+            操作
+            <!--<a href="#tab4" class="weui-tabbar__item" id="xpp_me">-->
+                <!--<div class="weui-tabbar__icon">-->
+                    <!--<img src="./images/icon_nav_cell.png" alt="">-->
+                <!--</div>-->
+                <!--<p class="weui-tabbar__label">我</p>-->
+            <!--</a>-->
+        </a>
+    </div>
+    <div class="weui-tab__bd ">
+        <div id="" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <article class="weui-article" id="xpp_article_content">
 
-<header class='demos-header'>
-    <h1 class="demos-title">Article</h1>
-</header>
-<article class="weui-article" id="xpp_article_content">
-
-
-
-
-</article>
+            </article>
+        </div>
+    </div>
+</div>
 
     <!-- body 最后 -->
     <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>

@@ -61,3 +61,49 @@
         });
     }
 })(jQuery);
+
+(function($){
+    AuthExt = new Object();
+    AuthExt.login = function (func) {
+            //token认证
+            // ajaxExt.post('/auth/check', {}, function (data) {
+            //if(!data.success){
+            //如果参数过多，建议通过 object 方式传入
+            console.log(11111)
+            $.login({
+                title: '登陆',
+                text: '请输入用户名和密码',
+                username: '',  // 默认用户名
+                password: '',  // 默认密码
+                onOK: function (username, password) {
+                    //点击确认
+                    //请求登录认证
+                    ajaxExt.post('/auth/login', {username:username, password:password}, function (data) {
+                        var result = data.result;
+                        console.log(1);
+                        if(!data.success){
+                            console.log(2);
+                            login();
+                            $.toptip('账号密码错误', 'error');
+
+                        }else {
+                            $.cookie('jwt-token', data.result.token, { expires: 7, path: '/' });
+                            console.log(func);
+                            if(func != undefined){
+                                func();
+                            }
+                            console.log(data)
+                        }
+                    })
+                    console.log(username, password)
+                },
+                onCancel: function () {
+                    //点击取消
+                }
+            });
+            // }
+            //});
+
+    }
+})(jQuery);
+
