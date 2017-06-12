@@ -5,11 +5,17 @@ use App\Models\File;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
 class ArticleController extends Controller
 {
     public $article;
+    /**
+     * 文章类型ID
+     * @var int
+     */
     protected $articleTypeId= 1;
 
     public function __construct(Article $article)
@@ -19,50 +25,52 @@ class ArticleController extends Controller
 
     public function getImage($id, $width)
     {
-        $file = File::find($id);
+        $file = File::find($id, ['id']);
         if(empty($file)){
             return response('404 Not Found', 404);
         }
 
-        $binary = $file->binary_long_blob;
+        $cacheKey = __CLASS__.__METHOD__.$id;
+        $img = Cache::rememberForever($cacheKey, function () use($id, $width) {
+            $file = File::find($id, ['id','binary_long_blob']);
+            $binary = $file->binary_long_blob;
+            Log::debug('image_cache');
+            $img = Image::make($binary);
+            if($width == 0 || $width > 690){
+                $width = 690;
+            }
 
-        $img = Image::make($binary);
+            $img = $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
 
-        if($width == 0 || $width > 690){
-            $width = 690;
-        }
-
-        $img = $img->resize($width, null, function ($constraint) {
-            $constraint->aspectRatio();
+            return $img->response('jpg');
         });
-        return $img->response('jpg');
 
-        $img = Image::make($binary)->resize(300, 200);
-        return $img->response('jpg');
-
-        return response($binary)->header('Content-type',$file->mime_type);
+        return $img;
     }
 
     public function getImagePreview($id)
     {
-        $file = File::find($id);
+        $file = File::find($id, ['id']);
         if(empty($file)){
             return response('404 Not Found', 404);
         }
 
-        $binary = $file->binary_long_blob;
+        $cacheKey = __CLASS__.__METHOD__.$id;
+        $img = Cache::rememberForever($cacheKey, function () use($id) {
+            $file = File::find($id, ['id','binary_long_blob']);
+            $binary = $file->binary_long_blob;
+            Log::debug('image_preview_cache');
+            $img = Image::make($binary);
 
-        $img = Image::make($binary);
-
-        $img = $img->resize(120, null, function ($constraint) {
-            $constraint->aspectRatio();
+            $img = $img->resize(120, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            return $img->response('jpg');
         });
-        return $img->response('jpg');
 
-        $img = Image::make($binary)->resize(300, 200);
-        return $img->response('jpg');
-
-        return response($binary)->header('Content-type',$file->mime_type);
+        return $img;
     }
 
     public function upload(Request $request)
