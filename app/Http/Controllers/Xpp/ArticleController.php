@@ -16,7 +16,7 @@ class ArticleController extends Controller
      * 文章类型ID
      * @var int
      */
-    protected $articleTypeId= 1;
+    protected $articleTypeId = 1;
 
     public function __construct(Article $article)
     {
@@ -70,60 +70,60 @@ class ArticleController extends Controller
     public function getImage($id, $width)
     {
         $file = File::find($id, ['id']);
-        if(empty($file)){
+        if (empty($file)) {
             return response('404 Not Found', 404);
         }
 
-        $cacheKey = __CLASS__.__METHOD__.$id;
-
-        $img = $this->get($cacheKey);
-        if(empty($img)){
-            $file = File::find($id, ['id','binary_long_blob']);
-            $binary = $file->binary_long_blob;
-            Log::debug('image_cache');
+        $cacheKey = __CLASS__ . __METHOD__ . $id;
+        if (app()->environment('production')) {
+            $binary = $this->get($cacheKey);
+            if (empty($img)) {
+                $file = File::find($id, ['id', 'binary_long_blob']);
+                $binary = $file->binary_long_blob;
+                $this->set($cacheKey, $binary);
+                Log::debug('image_cache');
+            }
             $img = Image::make($binary);
-            if($width == 0 || $width > 690){
+            if ($width == 0 || $width > 690) {
                 $width = 690;
             }
             $img = $img->resize($width, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             $img = $img->response('jpg');
-            $this->set($cacheKey, $img);
-        }
-        
-        return $img;
 
-//        $cacheKey = __CLASS__.__METHOD__.$id;
-//        $img = Cache::rememberForever($cacheKey, function () use($id, $width) {
-//            $file = File::find($id, ['id','binary_long_blob']);
-//            $binary = $file->binary_long_blob;
-//            Log::debug('image_cache');
-//            $img = Image::make($binary);
-//            if($width == 0 || $width > 690){
-//                $width = 690;
-//            }
-//
-//            $img = $img->resize($width, null, function ($constraint) {
-//                $constraint->aspectRatio();
-//            });
-//
-//            return $img->response('jpg');
-//        });
-//
-//        return $img;
+            return $img;
+        } else {
+            $img = Cache::rememberForever($cacheKey, function () use ($id, $width) {
+                $file = File::find($id, ['id', 'binary_long_blob']);
+                $binary = $file->binary_long_blob;
+                Log::debug('image_cache');
+                $img = Image::make($binary);
+                if ($width == 0 || $width > 690) {
+                    $width = 690;
+                }
+
+                $img = $img->resize($width, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                return $img->response('jpg');
+            });
+
+            return $img;
+        }
     }
 
     public function getImagePreview($id)
     {
         $file = File::find($id, ['id']);
-        if(empty($file)){
+        if (empty($file)) {
             return response('404 Not Found', 404);
         }
 
-        $cacheKey = __CLASS__.__METHOD__.$id;
-        $img = Cache::rememberForever($cacheKey, function () use($id) {
-            $file = File::find($id, ['id','binary_long_blob']);
+        $cacheKey = __CLASS__ . __METHOD__ . $id;
+        $img = Cache::rememberForever($cacheKey, function () use ($id) {
+            $file = File::find($id, ['id', 'binary_long_blob']);
             $binary = $file->binary_long_blob;
             Log::debug('image_preview_cache');
             $img = Image::make($binary);
@@ -142,10 +142,10 @@ class ArticleController extends Controller
         try {
             $images = $request->input('images');
 
-            if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $images, $result)){
+            if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $images, $result)) {
                 $type = $result[2];
-                $rand = rand(1000,9999);
-                $filename = md5(time().$rand).'.'.$type;
+                $rand = rand(1000, 9999);
+                $filename = md5(time() . $rand) . '.' . $type;
                 $imageBinary = base64_decode(str_replace($result[1], '', $images));
 
                 $fileModel = new \App\Models\File();
@@ -167,7 +167,7 @@ class ArticleController extends Controller
 
             }
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             print_r($e->getMessage());
         }
 
@@ -183,18 +183,18 @@ class ArticleController extends Controller
         //
         $articles = $this->article->ofStatus()->paginate(20);
 
-        foreach ($articles as $article){
+        foreach ($articles as $article) {
             $images = $article->images;
             $imageArr = explode(',', $images);
             $imageArr = array_values(array_filter($imageArr));
-            if (count($imageArr) > 0){
-                $thumb = '/article/image/preview/'.$imageArr['0'];
-            }else{
+            if (count($imageArr) > 0) {
+                $thumb = '/article/image/preview/' . $imageArr['0'];
+            } else {
                 $thumb = '/static/images/pic_160.png';
             }
             $article->thumb = $thumb;
             $articleId = $article->id;
-            $article->a_href = '/static/article.html?article_id='.$articleId;
+            $article->a_href = '/static/article.html?article_id=' . $articleId;
         }
         return $articles;
     }
@@ -212,13 +212,13 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $status = $request->input('status', 0);
-        if($status == 'on' || $status == 'On'){
+        if ($status == 'on' || $status == 'On') {
             $status = 1;
         }
         $title = $request->input('title');
@@ -230,61 +230,61 @@ class ArticleController extends Controller
         $article = $this->article->where('images', '=', $images)
             ->first();
 
-        if(!empty($article)){
-            return response(['success'=>false, 'msg'=>'重复提交', 'status'=>500]);
+        if (!empty($article)) {
+            return response(['success' => false, 'msg' => '重复提交', 'status' => 500]);
         }
         try {
             $article = new Article();
             $article->title = $title;
-            $article->slug = md5($images . $title . $description.$this->articleTypeId);
+            $article->slug = md5($images . $title . $description . $this->articleTypeId);
             $article->description = $description;
             $article->status = $status;
             $article->category_id = $categoryId;
             $article->images = $images;
             $article->article_type_id = $this->articleTypeId;
             $article->save();
-        }catch (QueryException $e){
-            return response(['success'=>false, 'msg'=>'重复提交', 'status'=>500]);
+        } catch (QueryException $e) {
+            return response(['success' => false, 'msg' => '重复提交', 'status' => 500]);
         }
 
-        return response(['success'=>true]);
+        return response(['success' => true]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
         $article = $this->article->ofStatus()->where('id', '=', $id)->first();
-        if(empty($article)){
+        if (empty($article)) {
             return response('404 Not Found', 404);
         }
-        $catId= $article->category_id;
-        if($catId == 1){
+        $catId = $article->category_id;
+        if ($catId == 1) {
             $article->category_name = '国画';
-        }elseif($catId == 2){
+        } elseif ($catId == 2) {
             $article->category_name = '儿童画';
-        }else{
+        } else {
             $article->category_name = '无';
         }
         $images = $article->images;
         $imageArr = array_values(array_filter(explode(',', $images)));
-        $imageList = array_map(function ($v){
-            $v = '/article/image/'.$v.'/690';
+        $imageList = array_map(function ($v) {
+            $v = '/article/image/' . $v . '/690';
             return $v;
         }, $imageArr);
         $article->image_list = $imageList;
-        return response()->json(['success'=>true, 'result'=>$article]);
+        return response()->json(['success' => true, 'result' => $article]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -295,8 +295,8 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -307,7 +307,7 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
