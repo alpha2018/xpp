@@ -5,7 +5,7 @@ use App\Models\File;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
@@ -19,13 +19,13 @@ class ArticleController extends Controller
      */
     protected $articleTypeId = 1;
 
-    public function __construct(Article $article, Cache $cache)
+    public function __construct(Article $article, CacheManager $cache)
     {
         $this->article = $article->ofType($this->articleTypeId);
         if (app()->environment('production')) {
             $this->cache = $cache->store('file');
         } else {
-            $this->cache = $cache;
+            $this->cache = $cache->store('file');
         }
     }
 
