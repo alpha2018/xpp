@@ -7,23 +7,11 @@
 
     <title>小爬爬美术</title>
 
-    <!-- Fonts -->
-    <!--<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel='stylesheet' type='text/css'>-->
-    <!--<link href="http://fonts.useso.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>-->
-
     <!-- head 中 -->
     <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
     <link rel="stylesheet" href="css/demos.css">
-    <style>
-        body {
-            font-family: 'Lato';
-        }
 
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
 </head>
 <body id="app-layout" ontouchstart>
 <div class="weui-tab">
@@ -135,7 +123,7 @@
 <script>
     $(function () {
         console.log(document.referrer);
-        if(typeof document.referrer === '' || document.referrer === ''){
+        if (typeof document.referrer === '' || document.referrer === '') {
             console.log(1);
             $('.jsBack').attr('href', '/');
         }
@@ -164,7 +152,6 @@
 
                 // 如果类型不在允许的类型范围内
                 if (allowTypes.indexOf(file.type) === -1) {
-
                     $.alert("该类型不允许上传！", "警告！");
                     continue;
                 }
@@ -204,7 +191,6 @@
                         var num = $('.weui-uploader__file').length;
                         $('.weui-uploader__info').text(num + '/' + maxCount);
 
-
                         var formData = new FormData();
 
                         formData.append("images", base64);
@@ -230,11 +216,8 @@
                                 $.toast("上传失败", 'cancel');
                             }
                         });
-
                     };
-
                 };
-
             }
         });
         var store = $('#showTooltips');
