@@ -23,6 +23,50 @@ class ArticleController extends Controller
         $this->article = $article->ofType($this->articleTypeId);
     }
 
+    protected function set($key, $value)
+    {
+        /*从平台获取数据库名*/
+        $dbname = 'ZMAePPlTYruMGUAlBhKk'; //数据库名称
+
+        /*从环境变量里取host,port,user,pwd*/
+        $host = 'redis.duapp.com';
+        $port = '80';
+        $user = '23835d42e53643619f50c2afa7dcaf83'; //用户AK
+        $pwd = '63fe5ee08a94434e98d2ac020ae4b0bc';  //用户SK
+
+        try {
+            /*建立连接后，在进行集合操作前，需要先进行auth验证*/
+            $redis = new \Redis();
+            $ret = $redis->connect($host, $port);
+            if ($ret === false) {
+                die($redis->getLastError());
+            }
+
+            $ret = $redis->auth($user . "-" . $pwd . "-" . $dbname);
+            if ($ret === false) {
+                die($redis->getLastError());
+            }
+
+            /*接下来就可以对该库进行操作了，具体操作方法请参考phpredis官方文档*/
+            //$redis->flushdb();
+            $ret = $redis->set("key", "value");
+            if ($ret === false) {
+                die($redis->getLastError());
+            } else {
+                echo "OK";
+            }
+
+        } catch (RedisException $e) {
+            die("Uncaught exception " . $e->getMessage());
+        }
+    }
+
+    protected function get($key)
+    {
+        $redis = new \Redis();
+        return $redis->get($key);
+    }
+
     public function getImage($id, $width)
     {
         $file = File::find($id, ['id']);
@@ -31,7 +75,9 @@ class ArticleController extends Controller
         }
 
         $cacheKey = __CLASS__.__METHOD__.$id;
-        $img = Cache::rememberForever($cacheKey, function () use($id, $width) {
+
+        $img = $this->get($cacheKey);
+        if(empty($img)){
             $file = File::find($id, ['id','binary_long_blob']);
             $binary = $file->binary_long_blob;
             Log::debug('image_cache');
@@ -39,15 +85,33 @@ class ArticleController extends Controller
             if($width == 0 || $width > 690){
                 $width = 690;
             }
-
             $img = $img->resize($width, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-
-            return $img->response('jpg');
-        });
-
+            $img = $img->response('jpg');
+            $this->set($cacheKey, $img);
+        }
+        
         return $img;
+
+//        $cacheKey = __CLASS__.__METHOD__.$id;
+//        $img = Cache::rememberForever($cacheKey, function () use($id, $width) {
+//            $file = File::find($id, ['id','binary_long_blob']);
+//            $binary = $file->binary_long_blob;
+//            Log::debug('image_cache');
+//            $img = Image::make($binary);
+//            if($width == 0 || $width > 690){
+//                $width = 690;
+//            }
+//
+//            $img = $img->resize($width, null, function ($constraint) {
+//                $constraint->aspectRatio();
+//            });
+//
+//            return $img->response('jpg');
+//        });
+//
+//        return $img;
     }
 
     public function getImagePreview($id)
