@@ -65,12 +65,24 @@ return [
             'strict'    => false,
         ],
 
-        'mysql_blog' => [
+        'mysql_xpp' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST_BLOG', 'sqld.duapp.com:4050'),
-            'database'  => env('DB_DATABASE_BLOG', 'JtrTnJGgIxXrVQXvkXJR'),
-            'username'  => env('DB_USERNAME_BLOG', '23835d42e53643619f50c2afa7dcaf83'),
-            'password'  => env('DB_PASSWORD_BLOG', '63fe5ee08a94434e98d2ac020ae4b0bc'),
+            'host'      => env('DB_HOST_XPP', 'sqld.duapp.com:4050'),
+            'database'  => env('DB_DATABASE_XPP', 'JtrTnJGgIxXrVQXvkXJR'),
+            'username'  => env('DB_USERNAME_XPP', '23835d42e53643619f50c2afa7dcaf83'),
+            'password'  => env('DB_PASSWORD_XPP', '63fe5ee08a94434e98d2ac020ae4b0bc'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
+        'mysql_xpp_image' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST_XPP_IMAGE', 'sqld.duapp.com:4050'),
+            'database'  => env('DB_DATABASE_XPP_IMAGE', 'iLPnVMSkmdRjGprVFnCI'),
+            'username'  => env('DB_USERNAME_XPP_IMAGE', '23835d42e53643619f50c2afa7dcaf83'),
+            'password'  => env('DB_PASSWORD_XPP_IMAGE', '63fe5ee08a94434e98d2ac020ae4b0bc'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
