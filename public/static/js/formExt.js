@@ -61,9 +61,8 @@
         });
     }
 })(jQuery);
-
 (function($){
-    AuthExt = new Object();
+    window.AuthExt = new Object();
     AuthExt.login = function (func) {
             //token认证
             // ajaxExt.post('/auth/check', {}, function (data) {
@@ -103,7 +102,15 @@
             });
             // }
             //});
-
+    }
+    AuthExt.check = function (func) {
+        var token = $.cookie('jwt-token');
+//            console.log(token);
+        if(!token){
+            AuthExt.login()
+        }else {
+            //loginSuccess();
+        }
     }
 })(jQuery);
 

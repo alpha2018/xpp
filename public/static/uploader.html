@@ -28,7 +28,7 @@
 <body id="app-layout" ontouchstart>
 <div class="weui-tab">
     <div class="weui-navbar">
-        <a class="weui-navbar__item" href="javascript:window.history.back();">
+        <a class="weui-navbar__item jsBack" href="javascript:window.history.back();">
             返回
         </a>
         <a class="weui-navbar__item  weui-bar__item--on" href="javascript:void(0)">
@@ -134,13 +134,12 @@
 <script src="js/formExt.js"></script>
 <script>
     $(function () {
-        var token = $.cookie('jwt-token');
-//            console.log(token);
-        if(!token){
-            AuthExt.login()
-        }else {
-            //loginSuccess();
+        console.log(document.referrer);
+        if(typeof document.referrer === '' || document.referrer === ''){
+            console.log(1);
+            $('.jsBack').attr('href', '/');
         }
+        AuthExt.check();
 
         // 允许上传的图片类型
         var allowTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
