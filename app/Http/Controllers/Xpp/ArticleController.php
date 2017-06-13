@@ -25,7 +25,7 @@ class ArticleController extends Controller
         if (app()->environment('production')) {
             $this->cache = $cache->store('file');
         } else {
-            $this->cache = $cache->store('file');
+            $this->cache = $cache->store('redis');
         }
     }
 
@@ -66,17 +66,19 @@ class ArticleController extends Controller
         }
 
         $cacheKey = __CLASS__ . __METHOD__ . $id;
-        $img = $this->cache->rememberForever($cacheKey, function () use ($id) {
+        $binary = $this->cache->rememberForever($cacheKey, function () use ($id) {
             $file = File::find($id, ['id', 'binary_long_blob']);
             $binary = $file->binary_long_blob;
             Log::debug('image_preview_cache');
-            $img = Image::make($binary);
-
-            $img = $img->resize(120, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            return $img->response('jpg');
+            return $binary;
         });
+
+        $img = Image::make($binary);
+
+        $img = $img->resize(120, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        return $img->response('jpg');
 
         return $img;
     }

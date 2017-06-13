@@ -30,20 +30,22 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        return parent::report($e);
-//        if ($this->shouldReport($e)) {
-//            $this->log->error([
-//                'request_url'=>request()->fullUrl(),
-//                'message' => $e->getMessage(),
-//                'code' => $e->getCode(),
-//                'file' => $e->getFile(),
-//                'line' => $e->getLine(),
-//                'previous' => $e->getPrevious(),
-//                //'severity' => 0,
-//                //'string' => $e->getTraceAsString(),
-//            ]);
-//        }
+        if ($this->shouldReport($e)) {
+//            # 解压PHP Log SDK后将BaeLog.class.php放在合适的位置
+//            # /<Path_Prefix>为BaeLog.class.php的相对路径
+//            require_once dirname(__FILE__) . '../../alphaeye/sdk/baev3-sdk-1.0.1/BaeLog.class.php';
+//
+//            $secret = array("user"=>"ak","passwd"=>"sk" );
+//            $log = \BaeLog::getInstance($secret);
+//            $log->setLogLevel(16);
+//            $log->Fatal("fatal log test");
+//            $log->Warning("Warning log test");
+//            $log->Notice("Notice log test");
+//            $log->Trace("Trace log test");
+//            $log->Debug("Debug log test");
+        }
 
+        return parent::report($e);
     }
 
     /**
