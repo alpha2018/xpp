@@ -77,7 +77,7 @@ class ArticleController extends Controller
         $cacheKey = __CLASS__ . __METHOD__ . $id;
         if (app()->environment('production')) {
             $binary = $this->get($cacheKey);
-            if (empty($img)) {
+            if (empty($binary)) {
                 $file = File::find($id, ['id', 'binary_long_blob']);
                 $binary = $file->binary_long_blob;
                 $this->set($cacheKey, $binary);
