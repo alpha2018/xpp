@@ -7,23 +7,11 @@
 
     <title>小爬爬美术</title>
 
-    <!-- Fonts -->
-    <!--<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel='stylesheet' type='text/css'>-->
-    <!--<link href="http://fonts.useso.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>-->
-
     <!-- head 中 -->
     <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
     <link rel="stylesheet" href="css/demos.css">
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
+ 
 </head>
 <body id="app-layout" ontouchstart>
 
@@ -194,15 +182,6 @@
             AuthExt.check(function () {
                 $('#tab4').attr('style', '');
             })
-            var token = $.cookie('jwt-token');
-////            console.log(token);
-//            if(!token){
-//                AuthExt.login(function () {
-//                    loginSuccess();
-//                })
-//            }else {
-//                loginSuccess();
-//            }
         });
     })
 </script>
