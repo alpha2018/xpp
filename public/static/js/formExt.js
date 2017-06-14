@@ -1,16 +1,9 @@
 /*****************************************************************
  form表单获取值封装类
  *****************************************************************/
-(function($){
-    formExt = new Object();
-
-    /**
-     * 获取form值
-     * @param form form对象 如 $('#form_id')
-     * 如：{Name:'摘取天上星',position:'IT技术'}
-     * ps:注意将同名的放在一个数组里
-     */
-    formExt.obj=function(form) {
+(function ($) {
+    window.formExt = new Object();
+    formExt.obj = function (form) {
         var data = {};
         var form = $(form).serializeArray();
         $.each(form, function () {
@@ -27,9 +20,9 @@
     }
 })(jQuery);
 
-(function($){
-    ajaxExt = new Object();
-    ajaxExt.post=function(url, data, func) {
+(function ($) {
+    window.ajaxExt = new Object();
+    ajaxExt.post = function (url, data, func) {
         $.ajax({
             url: url,
             type: 'POST',
@@ -41,11 +34,12 @@
                 func(result);
             },
             error: function (xhr, type) {
-                alert('Ajax error!')
+                //alert('Ajax error!')
+                $.toast("操作失败，请稍后再试", 'cancel');
             }
         });
     }
-    ajaxExt.get=function(url, func) {
+    ajaxExt.get = function (url, func) {
         $.ajax({
             url: url,
             type: 'GET',
@@ -61,55 +55,53 @@
         });
     }
 })(jQuery);
-(function($){
+(function ($) {
     window.AuthExt = new Object();
     AuthExt.login = function (func) {
-            //token认证
-            // ajaxExt.post('/auth/check', {}, function (data) {
-            //if(!data.success){
-            //如果参数过多，建议通过 object 方式传入
-            console.log(11111)
-            $.login({
-                title: '登陆',
-                text: '请输入用户名和密码',
-                username: '',  // 默认用户名
-                password: '',  // 默认密码
-                onOK: function (username, password) {
-                    //点击确认
-                    //请求登录认证
-                    ajaxExt.post('/auth/login', {username:username, password:password}, function (data) {
-                        var result = data.result;
-                        console.log(1);
-                        if(!data.success){
-                            console.log(2);
-                            login();
-                            $.toptip('账号密码错误', 'error');
+        console.log('登录判断')
+        $.login({
+            title: '登陆',
+            //text: '请输入用户名和密码',
+            username: '',  // 默认用户名
+            password: '',  // 默认密码
+            onOK: function (username, password) {
+                //点击确认
+                //请求登录认证
+                ajaxExt.post('/auth/login', {username: username, password: password}, function (data) {
+                    var result = data.result;
+                    console.log(1);
+                    if (!data.success) {
+                        console.log(2);
+                        AuthExt.login();
+                        $.toptip('账号密码错误', 'error');
 
-                        }else {
-                            $.cookie('jwt-token', data.result.token, { expires: 7, path: '/' });
-                            console.log(func);
-                            if(func != undefined){
-                                func();
-                            }
-                            console.log(data)
+                    } else {
+                        $.cookie('jwt-token', data.result.token, {expires: 7, path: '/'});
+                        console.log(func);
+                        if (func != undefined) {
+                            func();
                         }
-                    })
-                    console.log(username, password)
-                },
-                onCancel: function () {
-                    //点击取消
-                }
-            });
-            // }
-            //});
+                        console.log(data)
+                    }
+                })
+                console.log(username, password)
+            },
+            onCancel: function () {
+                //点击取消
+            }
+        });
     }
     AuthExt.check = function (func) {
+        console.log('登录验证');
         var token = $.cookie('jwt-token');
-//            console.log(token);
-        if(!token){
-            AuthExt.login()
-        }else {
-            //loginSuccess();
+        if (!token) {
+            AuthExt.login(func())
+        } else {
+            if (func == undefined) {
+
+            }else {
+                func();
+            }
         }
     }
 })(jQuery);

@@ -191,15 +191,18 @@
         }
 
         $('#xpp_me').click(function(){
+            AuthExt.check(function () {
+                $('#tab4').attr('style', '');
+            })
             var token = $.cookie('jwt-token');
-//            console.log(token);
-            if(!token){
-                AuthExt.login(function () {
-                    loginSuccess();
-                })
-            }else {
-                loginSuccess();
-            }
+////            console.log(token);
+//            if(!token){
+//                AuthExt.login(function () {
+//                    loginSuccess();
+//                })
+//            }else {
+//                loginSuccess();
+//            }
         });
     })
 </script>
