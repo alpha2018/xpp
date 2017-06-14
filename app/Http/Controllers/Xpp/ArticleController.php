@@ -34,7 +34,10 @@ class ArticleController extends Controller
         $articles = $this->article->ofStatus()
             ->orderBy('stick', 'desc')
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(20, [
+                'id', 'article_type_id', 'description', 'class_date', 'images',
+                'stick', 'title', 'view_count'
+            ]);
 
         foreach ($articles as $article) {
             $images = $article->images;
