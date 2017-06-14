@@ -23,9 +23,9 @@ Route::get('/', function (){
 Route::any('auth/login', 'Auth\\LoginController@postLogin');
 Route::any('auth/check', 'Auth\\LoginController@postCheckToken');
 
-Route::get('article/image/preview/{id}', 'Xpp\\ArticleController@getImagePreview');
-Route::get('article/image/{id}/{width}', 'Xpp\\ArticleController@getImage');
+Route::get('article/image/preview/{id}', 'Xpp\\ImageController@preview');
+Route::get('article/image/{id}/{width}', 'Xpp\\ImageController@show');
 
-Route::any('article/upload', 'Xpp\\ArticleController@upload');
+Route::any('article/upload', 'Xpp\\ImageController@upload');
 Route::resource('article', 'Xpp\\ArticleController');
 
