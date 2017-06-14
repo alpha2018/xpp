@@ -2,7 +2,7 @@
 
 class Image extends BaseModel
 {
-    protected $table = 'blog_files';
+    protected $table = 'blog_images';
 
     protected $fillable = [];
 
