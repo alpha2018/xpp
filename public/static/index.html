@@ -146,6 +146,18 @@
 <script src="js/formExt.js"></script>
 <script>
     $(function () {
+        $('.weui-tabbar__item').click(function () {
+            var hash = $(this).attr('href');
+            console.log(location.hash = hash)
+        })
+        if(location.hash != undefined || location.hash != ''){
+//            $('.weui-tabbar__item').attr('class', 'weui-tabbar__item');
+//            $('a[href='+location.hash+']').attr('class', 'weui-tabbar__item  weui-bar__item--on');
+//            $('.weui-tab__bd-item ').attr('class', 'weui-tab__bd-item');
+//            console.log();
+//            var id = location.hash;
+//            $('a[id='+location.hash+']').addClass('weui-tab__bd-item weui-tab__bd-item--active')
+        }
         ajaxExt.get('/article', function (result) {
             $('#xpp_loadmore').attr('style', 'display:none;');
             console.log("请求成功，JSON解析后的响应数据为:", result);
