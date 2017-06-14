@@ -31,11 +31,8 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $sticks = $this->article->ofStatus()
-            ->where('stick', '>', 0)
-            ->orderBy('stick', 'Desc')
-            ->get();
         $articles = $this->article->ofStatus()
+            ->orderBy('stick', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
