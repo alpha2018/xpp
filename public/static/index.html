@@ -57,11 +57,12 @@
 
             <div class="weui-cells__title">新消息提示跟摘要信息后，统一在列表右侧</div>
             <div class="weui-cells">
-                <div class="weui-cell weui-cell_access">
+                <a class="weui-cell weui-cell_access" style="color: #151414;text-decoration: none;" href="uploader.html">
                     <div class="weui-cell__bd">
-                        <a class="" href="uploader.html" style="color: #151414;text-decoration: none;">发表文章</a>
+                        发表文章
+                        <!--<a class="" href="uploader.html" style="color: #151414;text-decoration: none;">发表文章</a>-->
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="weui-cells__title">未读数红点跟在主题信息后，统一在列表左侧</div>
@@ -147,16 +148,24 @@
 <script>
     $(function () {
         $('.weui-tabbar__item').click(function () {
-            var hash = $(this).attr('href');
-            console.log(location.hash = hash)
+            location.hash = $(this).attr('href');
         })
         if(location.hash != undefined || location.hash != ''){
-//            $('.weui-tabbar__item').attr('class', 'weui-tabbar__item');
-//            $('a[href='+location.hash+']').attr('class', 'weui-tabbar__item  weui-bar__item--on');
-//            $('.weui-tab__bd-item ').attr('class', 'weui-tab__bd-item');
-//            console.log();
-//            var id = location.hash;
-//            $('a[id='+location.hash+']').addClass('weui-tab__bd-item weui-tab__bd-item--active')
+            var id = location.hash;
+           console.log('id',id);
+           switch (id){
+               case '#tab1':
+                   break;
+               case '#tab4':
+                   $('.weui-tabbar__item').removeClass('weui-bar__item--on');
+                   $('a[href='+id+']').addClass('weui-bar__item--on');
+                   $('#tab1').removeClass('weui-tab__bd-item--active');
+                   $('#tab2').removeClass('weui-tab__bd-item--active');
+                   $('#tab3').removeClass('weui-tab__bd-item--active');
+                   $('#tab4').addClass('weui-tab__bd-item--active');
+                   $('#tab4').attr('style', '');
+                   break;
+           }
         }
         ajaxExt.get('/article', function (result) {
             $('#xpp_loadmore').attr('style', 'display:none;');
