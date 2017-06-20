@@ -29,7 +29,7 @@ class LoginController extends Controller
     {
         $username = $request->input('username');
         $password = (string)$request->input('password');
-        $user = $this->user->where('name', '=', $username)->first();
+        $user = $this->user->where('name', '=', $username)->first(['avatar', 'name', 'nickname', 'status', 'password']);
         if(empty($user)){
             return response()->json(['success'=>false, 'result'=>null, 'msg'=>'账号或密码错误']);
         }
