@@ -57,7 +57,7 @@
 })(jQuery);
 (function ($) {
     window.AuthExt = new Object();
-    AuthExt.login = function (func) {
+    AuthExt.login = function () {
         console.log('登录判断')
         $.login({
             title: '登陆',
@@ -69,18 +69,11 @@
                 //请求登录认证
                 ajaxExt.post('/auth/login', {username: username, password: password}, function (data) {
                     var result = data.result;
-                    console.log(1);
                     if (!data.success) {
-                        console.log(2);
                         AuthExt.login();
                         $.toptip('账号密码错误', 'error');
-
                     } else {
                         $.cookie('jwt-token', data.result.token, {expires: 7, path: '/'});
-                        console.log(func);
-                        if (func != undefined) {
-                            func();
-                        }
                         console.log(data)
                     }
                 })
@@ -91,17 +84,18 @@
             }
         });
     }
-    AuthExt.check = function (func) {
+    AuthExt.check = function () {
         console.log('登录验证');
         var token = $.cookie('jwt-token');
         if (!token) {
-            AuthExt.login(func())
+            AuthExt.login()
         } else {
-            if (func == undefined) {
-
-            }else {
-                func();
-            }
+            // if (func == undefined) {
+            //
+            // }else {
+            //     func();
+            // }
+            return true;
         }
     }
 })(jQuery);

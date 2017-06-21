@@ -157,13 +157,15 @@
                case '#tab1':
                    break;
                case '#tab4':
-                   $('.weui-tabbar__item').removeClass('weui-bar__item--on');
-                   $('a[href='+id+']').addClass('weui-bar__item--on');
-                   $('#tab1').removeClass('weui-tab__bd-item--active');
-                   $('#tab2').removeClass('weui-tab__bd-item--active');
-                   $('#tab3').removeClass('weui-tab__bd-item--active');
-                   $('#tab4').addClass('weui-tab__bd-item--active');
-                   $('#tab4').attr('style', '');
+                   if(AuthExt.check()){
+                       $('.weui-tabbar__item').removeClass('weui-bar__item--on');
+                       $('a[href='+id+']').addClass('weui-bar__item--on');
+                       $('#tab1').removeClass('weui-tab__bd-item--active');
+                       $('#tab2').removeClass('weui-tab__bd-item--active');
+                       $('#tab3').removeClass('weui-tab__bd-item--active');
+                       $('#tab4').addClass('weui-tab__bd-item--active');
+                       $('#tab4').attr('style', '');
+                   }
                    break;
            }
         }
@@ -200,9 +202,9 @@
         }
 
         $('#xpp_me').click(function(){
-            AuthExt.check(function () {
+            if(AuthExt.check()){
                 $('#tab4').attr('style', '');
-            })
+            }
         });
     })
 </script>
