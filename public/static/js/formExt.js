@@ -81,6 +81,7 @@
             },
             onCancel: function () {
                 //点击取消
+                location.hash = '';
             }
         });
     }
