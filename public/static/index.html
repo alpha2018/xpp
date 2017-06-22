@@ -103,7 +103,7 @@
     </div>
 
     <div class="weui-tabbar">
-        <a href="#tab1" class="weui-tabbar__item  weui-bar__item--on">
+        <a href="#tab1" class="weui-tabbar__item  weui-bar__item--on" id="xpp_tab1">
             <div class="weui-tabbar__icon">
                 <img src="./images/icon_nav_article.png" alt="">
             </div>
@@ -188,6 +188,17 @@
     }
 
     $(function () {
+        $('#xpp_me').click(function(){
+            if(AuthExt.check()){
+                $('#tab4').attr('style', '');
+            }
+        });
+        $('#xpp_tab1').click(function () {
+            console.log($('#xpp_loadmore').attr('style'))
+            if($('#xpp_loadmore').attr('style') == undefined){
+                initTab1();
+            }
+        })
         $('.weui-tabbar__item').click(function () {
             location.hash = $(this).attr('href');
         })
@@ -205,12 +216,6 @@
                    break;
            }
         }
-
-        $('#xpp_me').click(function(){
-            if(AuthExt.check()){
-                $('#tab4').attr('style', '');
-            }
-        });
     })
 </script>
 </body>
