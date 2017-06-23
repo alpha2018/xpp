@@ -81,7 +81,7 @@
             },
             onCancel: function () {
                 //点击取消
-                location.hash = '';
+                //location.hash = '';
             }
         });
     }
@@ -91,11 +91,6 @@
         if (!token) {
             AuthExt.login()
         } else {
-            // if (func == undefined) {
-            //
-            // }else {
-            //     func();
-            // }
             return true;
         }
     }
