@@ -1,7 +1,6 @@
 <?php namespace AlphaEyeCore\Utils;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Tymon\JWTAuth\JWTAuth;
 
 /**
@@ -25,12 +24,12 @@ class AuthUtils
 
     public static function auth()
     {
-
+        return $GLOBALS['jwt_auth'];
     }
 
     public static function user()
     {
-
+        return $GLOBALS['jwt_auth']['user'];
     }
 
     protected function setAuth($user, Request $request)
@@ -61,7 +60,7 @@ class AuthUtils
 
     protected function getAuthCache($token)
     {
-        return $valu = $this->cache->get($this->getCacheKey($token));
+        return $this->cache->get($this->getCacheKey($token));
     }
 
     protected function getCacheMinutes()
@@ -75,6 +74,12 @@ class AuthUtils
     }
 
 
+    /**
+     * 设置token
+     * @param $user
+     * @param $request
+     * @return string
+     */
     public function setToken($user, $request)
     {
         $token = $this->JWTAuth->fromUser($user);
@@ -83,14 +88,25 @@ class AuthUtils
         return $token;
     }
 
+    /**
+     * token认证
+     * @param $token
+     * @return bool
+     */
     public function check($token)
     {
         $user = $this->JWTAuth->toUser($token);
-        $valu  = $this->getAuthCache($token);
+        $auth  = $this->getAuthCache($token);
+        //todo ip和浏览器验证
+        if(true){
+
+        }
+
         if(empty($user)){
             return false;
         }
 
+        $GLOBALS['jwt_auth'] = $auth;
         return true;
     }
 
@@ -102,5 +118,33 @@ class AuthUtils
     public function getUser()
     {
 
+    }
+
+    /**
+     * Retreiving the Authenticated user from a token
+     * @param $token
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function getAuthenticatedUser($token)
+    {
+        try {
+            if(! $user = $this->JWTAuth->toUser($token)){
+                return response()->json(['user_not_found'], 404);
+            }
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['token_expired'], $e->getStatusCode());
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
+
+        // the token is valid and we have found the user via the sub claim
+        return response()->json(compact('user'));
+    }
+
+    protected function invalidate($token)
+    {
+        return $this->JWTAuth->invalidate($token);
     }
 }

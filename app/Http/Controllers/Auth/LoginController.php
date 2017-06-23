@@ -29,7 +29,7 @@ class LoginController extends Controller
     {
         $username = $request->input('username');
         $password = (string)$request->input('password');
-        $user = $this->user->where('name', '=', $username)->first(['avatar', 'name', 'nickname', 'status', 'password']);
+        $user = $this->user->where('name', '=', $username)->first();
         if(empty($user)){
             return response()->json(['success'=>false, 'result'=>null, 'msg'=>'账号或密码错误']);
         }
@@ -38,15 +38,21 @@ class LoginController extends Controller
         }
 
         $token = app(AuthUtils::class)->setToken($user, $request);
-        $result = ['user'=>$user, 'token'=>$token];
+        $result = ['user'=>[
+            'avatar' => $user->avatar,
+            'nickname' => $user->nickname,
+            
+        ], 'token'=>$token];
 
         return response()->json(['success'=>true, 'result'=>$result, 'msg'=>'登陆成功']);
     }
 
     public function postCheckToken(Request $request)
     {
-        $token = $request->cookie('jwt-token');
+        $token = $request->cookie('jwt-token') ?  : $request->input('token');
+
         $result = app(AuthUtils::class)->check($token);
+
         if(!$result){
             return response()->json(['success'=>false]);
         }
