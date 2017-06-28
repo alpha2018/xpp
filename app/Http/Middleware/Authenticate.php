@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use AlphaEyeCore\Utils\AuthUtils;
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
+use Tymon\JWTAuth\JWTAuth;
 
 class Authenticate
 {
@@ -17,10 +18,10 @@ class Authenticate
     /**
      * Create a new filter instance.
      *
-     * @param  Guard  $auth
+     * @param  AuthUtils  $auth
      * @return void
      */
-    public function __construct(Guard $auth)
+    public function __construct(AuthUtils $auth)
     {
         $this->auth = $auth;
     }
@@ -34,7 +35,8 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
+        $token = app(JWTAuth::class)->getToken();
+        if (!$token && !$this->auth->check($token)) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {

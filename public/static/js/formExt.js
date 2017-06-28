@@ -2,7 +2,7 @@
  form表单获取值封装类
  *****************************************************************/
 (function ($) {
-    window.formExt = new Object();
+    window.formExt = {};
     formExt.obj = function (form) {
         var data = {};
         var form = $(form).serializeArray();
@@ -21,7 +21,7 @@
 })(jQuery);
 
 (function ($) {
-    window.ajaxExt = new Object();
+    window.ajaxExt = {};
     ajaxExt.post = function (url, data, func) {
         $.ajax({
             url: url,
@@ -29,6 +29,9 @@
             data: data,
             //contentType: false,
             //processData: false,
+            headers: {
+                'Authorization': 'Bearer '+$.cookie('token')
+            },
             success: function (result) {
                 console.log("请求成功，JSON解析后的响应数据为:", result);
                 func(result);
@@ -56,7 +59,7 @@
     }
 })(jQuery);
 (function ($) {
-    window.AuthExt = new Object();
+    window.AuthExt = {};
     AuthExt.login = function () {
         console.log('登录判断')
         $.login({
@@ -76,15 +79,14 @@
                 // Encrypt with the public key...
                 var encrypt = new JSEncrypt();
                 encrypt.setPublicKey(publicKey);
-                var encrypted = encrypt.encrypt(password);
-                password = encrypted;
+                password = encrypt.encrypt(password);
                 ajaxExt.post('/auth/login', {username: username, password: password}, function (data) {
                     var result = data.result;
                     if (!data.success) {
                         AuthExt.login();
                         $.toptip('账号密码错误', 'error');
                     } else {
-                        $.cookie('jwt-token', data.result.token, {expires: 7, path: '/'});
+                        $.cookie('token', data.result.token, {expires: 7, path: '/'});
                         console.log(data)
                     }
                 })
@@ -98,7 +100,7 @@
     }
     AuthExt.check = function () {
         console.log('登录验证');
-        var token = $.cookie('jwt-token');
+        var token = $.cookie('token');
         if (!token) {
             AuthExt.login()
         } else {

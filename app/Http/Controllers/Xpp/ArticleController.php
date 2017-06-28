@@ -21,6 +21,7 @@ class ArticleController extends Controller
     public function __construct(Article $article)
     {
         $this->article = $article->ofType($this->articleTypeId);
+        $this->middleware('auth', ['except'=>['show', 'index']]);
     }
 
     /**

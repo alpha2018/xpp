@@ -119,6 +119,7 @@
 <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/swiper.min.js"></script>
 <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
 <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="js/jsencrypt.min.js"></script>
 <script src="js/formExt.js"></script>
 <script>
     $(function () {
@@ -222,35 +223,42 @@
         });
         var store = $('#showTooltips');
         store.click(function () {
-
             var images = $('#xpp_article_images').val();
             var title = $('#xpp_article_title').val();
             var description = $('#xpp_article_description').val();
             var classDate = $("#time-format").val();
             if (!title) {
-                $.toptip('请输入标题');
+                $.toptip('请输入标题', 'error');
                 return false;
             }
             if (!description) {
-                $.toptip('请输入描述');
+                $.toptip('请输入描述', 'error');
                 return false;
             }
             if (!images) {
-                $.toptip('请上传图片');
+                $.toptip('请上传图片', 'error');
                 return false;
             }
             if (!classDate) {
-                $.toptip('请选择上课日期');
+                $.toptip('请选择上课日期', 'error');
                 return false;
             }
-            //console.log('保存');
+            console.log('保存');
             var data = formExt.obj($('#xpp_article_form'))
             //console.log(data)
             ajaxExt.post('/article', data, function (result) {
                 if (!result.success) {
                     return $.toast(result.msg, "cancel");
                 }
-                $.toast("保存成功", function () {
+//                $.toast("保存成功", function () {
+//                });
+                $.modal({
+                    title: "保存成功",
+                    text: "",
+                    buttons: [
+                        { text: "返回首页", onClick: function(){ console.log(2)} },
+                        { text: "继续添加", className: "default", onClick: function(){ console.log(3)} },
+                    ]
                 });
             })
         });
