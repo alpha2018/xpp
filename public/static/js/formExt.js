@@ -67,6 +67,17 @@
             onOK: function (username, password) {
                 //点击确认
                 //请求登录认证
+                var publicKey = '-----BEGIN PUBLIC KEY-----\
+                MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDFZSmcK+TfwxWUQoXUJm9p/uhb\
+                fpEn83wg1B78lzdAwfSgGwaP7MTBVYxDCYLDVaTZd6uLdvyE5K9BmbJKRkyILUVH\
+                oyna/pqsLjnz+tLo0AVd1zhzhnfWYyB03b8bPZXHUYWmafzt8kEZzKWWdCx7uC4P\
+                WKJQVJwVxXSw/U2qhwIDAQAB\
+                -----END PUBLIC KEY-----';
+                // Encrypt with the public key...
+                var encrypt = new JSEncrypt();
+                encrypt.setPublicKey(publicKey);
+                var encrypted = encrypt.encrypt(password);
+                password = encrypted;
                 ajaxExt.post('/auth/login', {username: username, password: password}, function (data) {
                     var result = data.result;
                     if (!data.success) {
@@ -81,7 +92,7 @@
             },
             onCancel: function () {
                 //点击取消
-                //location.hash = '';
+                location.hash = '';
             }
         });
     }
@@ -91,6 +102,11 @@
         if (!token) {
             AuthExt.login()
         } else {
+            // if (func == undefined) {
+            //
+            // }else {
+            //     func();
+            // }
             return true;
         }
     }

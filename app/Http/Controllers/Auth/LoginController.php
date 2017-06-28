@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 use AlphaEyeCore\Utils\AuthUtils;
+use AlphaEyeRsa\Rsa\Rsa;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,6 +30,9 @@ class LoginController extends Controller
     {
         $username = $request->input('username');
         $password = (string)$request->input('password');
+
+        $password = app(Rsa::class)->decodePublicKeyEncode($password);
+
         $user = $this->user->where('name', '=', $username)->first();
         if(empty($user)){
             return response()->json(['success'=>false, 'result'=>null, 'msg'=>'账号或密码错误']);
@@ -41,7 +45,7 @@ class LoginController extends Controller
         $result = ['user'=>[
             'avatar' => $user->avatar,
             'nickname' => $user->nickname,
-            
+
         ], 'token'=>$token];
 
         return response()->json(['success'=>true, 'result'=>$result, 'msg'=>'登陆成功']);

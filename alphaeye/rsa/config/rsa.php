@@ -1,0 +1,33 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: leo
+ * Date: 2017/6/28
+ * Time: 上午11:42
+ */
+return [
+    //公钥
+    'public_key' => '-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDFZSmcK+TfwxWUQoXUJm9p/uhb
+fpEn83wg1B78lzdAwfSgGwaP7MTBVYxDCYLDVaTZd6uLdvyE5K9BmbJKRkyILUVH
+oyna/pqsLjnz+tLo0AVd1zhzhnfWYyB03b8bPZXHUYWmafzt8kEZzKWWdCx7uC4P
+WKJQVJwVxXSw/U2qhwIDAQAB
+-----END PUBLIC KEY-----',
+
+    //私钥
+    'private_key' => '-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQDFZSmcK+TfwxWUQoXUJm9p/uhbfpEn83wg1B78lzdAwfSgGwaP
+7MTBVYxDCYLDVaTZd6uLdvyE5K9BmbJKRkyILUVHoyna/pqsLjnz+tLo0AVd1zhz
+hnfWYyB03b8bPZXHUYWmafzt8kEZzKWWdCx7uC4PWKJQVJwVxXSw/U2qhwIDAQAB
+AoGASeqo2zdAnF30DbGfZaMC44E1x1Usy/YMTErCU7nYUeKPVQjpuylhQDhlrpC4
+K6c9dMWwMihbRPRRgFIqhk+uxkKVKz89dhSFV9gWGufUxXpPmOU0i0N0bGBbVdl7
+s1F3RMjjNKSr4QDvzPb9eHJeYvTbqNXSrwZkG+2sS/UalYkCQQD1WPYvcQrBbB1N
+ziz83OrEB5ImXYq4gCw4wqxF29UTSIDIAjXe8myCAOyrHMNhk/RlwffuT4zBF4+8
+td04DY67AkEAzfc14JPx8YSCkspGzLo8xU595QTBekypmr+GWDftjuMMeULfloVM
+aBMM8QX6M/Ui4nxOJP1vigNeGBkoWwVEpQJBAIKMa7Kiu85f8NfNtTJ3epQEU0gG
+ziGOUfmB3JjveFliYuQKCRAwfnxOcaA7Fdt+FrVumLY9re+w0dLgEm4ZCLECQBjV
+e9uOOxfh4FSOqya4NeecZTWd8y4p3DFacnpkk/Iski50z7y4adQKp/7Pt7FYF1Kz
+pkBzhmVfrpK9Rc5jvjkCQHLA8y0FZKsObme1wkumjXPMsHkBtLd7245FGyM7mxr0
+YNKdt60ebRQmQN2m7PUKxW3t/+1ZpFKK2VLaN1gEfxQ=
+-----END RSA PRIVATE KEY-----',
+];

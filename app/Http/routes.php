@@ -29,3 +29,8 @@ Route::get('article/image/{id}/{width}', 'Xpp\\ImageController@show');
 Route::any('article/upload', 'Xpp\\ImageController@upload');
 Route::resource('article', 'Xpp\\ArticleController');
 
+Route::any('test_rsa', function (){
+    config();
+    app(\AlphaEyeRsa\Rsa\Rsa::class);
+});
+

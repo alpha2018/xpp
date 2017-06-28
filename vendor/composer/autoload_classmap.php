@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AlphaEyeCore\\LHttp\\LMiddleware\\AccessLogMiddleware' => $baseDir . '/alphaeye/core/src/LHttp/LMiddleware/AccessLogMiddleware.php',
     'AlphaEyeCore\\LHttp\\LProviders\\CoreServiceProvider' => $baseDir . '/alphaeye/core/src/LHttp/LProviders/CoreServiceProvider.php',
     'AlphaEyeCore\\LProviders\\RouteServiceProvider' => $baseDir . '/alphaeye/core/src/LHttp/LProviders/RouteServiceProvider.php',
     'AlphaEyeCore\\ReturnUtils' => $baseDir . '/alphaeye/core/src/Utils/ReturnUtils.php',
@@ -20,6 +21,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Xpp\\ArticleController' => $baseDir . '/app/Http/Controllers/Xpp/ArticleController.php',
+    'App\\Http\\Controllers\\Xpp\\ImageController' => $baseDir . '/app/Http/Controllers/Xpp/ImageController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -27,12 +29,14 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\Request' => $baseDir . '/app/Http/Requests/Request.php',
     'App\\Jobs\\Job' => $baseDir . '/app/Jobs/Job.php',
+    'App\\Models\\AccessLog' => $baseDir . '/app/Models/AccessLog.php',
     'App\\Models\\Access\\User\\Traits\\UserAccess' => $baseDir . '/app/Models/User/Traits/UserAccess.php',
     'App\\Models\\Access\\User\\Traits\\UserSendPasswordReset' => $baseDir . '/app/Models/User/Traits/UserSendPasswordReset.php',
     'App\\Models\\Article' => $baseDir . '/app/Models/Article.php',
     'App\\Models\\BaseModel' => $baseDir . '/app/Models/BaseModel.php',
     'App\\Models\\Common\\Traits\\Attribute\\CommonAttribute' => $baseDir . '/app/Models/Common/Traits/Attribute/CommonAttribute.php',
     'App\\Models\\File' => $baseDir . '/app/Models/File.php',
+    'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Module' => $baseDir . '/app/Models/Module.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
