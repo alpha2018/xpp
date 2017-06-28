@@ -19,13 +19,6 @@
     <div class="weui-tab__bd" id="xpp_tab">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
             <div style="margin-bottom:53px">
-                <!--<div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000" >-->
-                    <!--<div class="swiper-wrapper" >-->
-                        <!--<div class="swiper-slide"><img src="/article/image/92/690" alt="" width="100%" ></div>-->
-                        <!--<div class="swiper-slide"><img src="/article/image/92/690" alt=""></div>-->
-                        <!--<div class="swiper-slide"><img src="/article/image/92/690" alt=""></div>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <header class='demos-header'>
                     <h1 class="demos-title">Panel</h1>
                 </header>
@@ -53,84 +46,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="tab2" class="weui-tab__bd-item">
-            <h1>页面二</h1>
-        </div>
-        <div id="tab3" class="weui-tab__bd-item">
-            <h1>页面三</h1>
-        </div>
-        <div id="tab4" class="weui-tab__bd-item" style="">
-            <header class='demos-header'>
-                <h1 class="demos-title">我的</h1>
-            </header>
-
-            <div class="weui-cells__title">新消息提示跟摘要信息后，统一在列表右侧</div>
-            <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" style="color: #151414;text-decoration: none;"
-                   href="uploader.html">
-                    <div class="weui-cell__bd">
-                        发表文章
-                        <!--<a class="" href="uploader.html" style="color: #151414;text-decoration: none;">发表文章</a>-->
-                    </div>
-                </a>
-            </div>
-
-            <div class="weui-cells__title">未读数红点跟在主题信息后，统一在列表左侧</div>
-            <div class="weui-cells">
-                <div class="weui-cell weui-cell_access">
-                    <div class="weui-cell__bd">
-                        <span style="vertical-align: middle">文章列表</span>
-                        <span class="weui-badge" style="margin-left: 5px;">8</span>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </div>
-                <div class="weui-cell weui-cell_access">
-                    <div class="weui-cell__bd">
-                        <span style="vertical-align: middle">单行列表</span>
-                        <span class="weui-badge" style="margin-left: 5px;">8</span>
-                    </div>
-                    <div class="weui-cell__ft">详细信息</div>
-                </div>
-                <div class="weui-cell weui-cell_access">
-                    <div class="weui-cell__bd">
-                        <span style="vertical-align: middle">单行列表</span>
-                        <span class="weui-badge" style="margin-left: 5px;">New</span>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </div>
-            </div>
         </div>
     </div>
-
-
-    <div class="weui-tabbar">
-        <a href="#tab1" class="weui-tabbar__item  weui-bar__item--on" id="xpp_tab1">
-            <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_article.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">发现</p>
-        </a>
-        <a href="javascript:void(0)" class="weui-tabbar__item">
-            <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_button.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">版块</p>
-        </a>
-        <a href="javascript:void(0)" class="weui-tabbar__item">
-            <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_msg.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">收藏</p>
-        </a>
-        <a href="#tab4" class="weui-tabbar__item" id="xpp_me">
-            <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_cell.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">我</p>
-        </a>
     </div>
 </div>
 
@@ -146,18 +63,11 @@
 <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
 
 <!-- 如果使用了某些拓展插件还需要额外的JS -->
-<script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/swiper.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script src="/static/js/jsencrypt.min.js"></script>
 <script src="/static/js/formExt.js"></script>
 <script>
     function initTab1(page) {
-        var config = {
-            pagination: '.swiper-pagination',
-            paginationClickable: true
-        };
-        $(".swiper-container").swiper(config)
         var url = '/article?page='+page;
         ajaxExt.get(url, function (result) {
 
@@ -187,25 +97,6 @@
                 $('#xpp_article_list').append(html);
             }
         });
-    }
-
-    function initTab4(id) {
-        if (AuthExt.check()) {
-            $('.weui-tabbar__item').removeClass('weui-bar__item--on');
-            $('a[href=' + id + ']').addClass('weui-bar__item--on');
-            $('#tab1').removeClass('weui-tab__bd-item--active');
-            $('#tab2').removeClass('weui-tab__bd-item--active');
-            $('#tab3').removeClass('weui-tab__bd-item--active');
-            $('#tab4').addClass('weui-tab__bd-item--active').attr('style', '');
-            
-        }else {
-            $('.weui-tabbar__item').removeClass('weui-bar__item--on');
-            $('a[href=' + id + ']').addClass('weui-bar__item--on');
-            $('#tab1').removeClass('weui-tab__bd-item--active');
-            $('#tab2').removeClass('weui-tab__bd-item--active');
-            $('#tab3').removeClass('weui-tab__bd-item--active');
-            $('#tab4').addClass('weui-tab__bd-item--active').attr('style', '');
-        }
     }
 
     $(function () {
