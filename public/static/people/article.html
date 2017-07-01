@@ -87,8 +87,14 @@
                             text: '你确认要删除文章吗？',
                             onOK: function () {
                                 //点击确认
+                                ajaxExt.post('/people/article/destroy/'+articleId, {}, function (data) {
+                                    if(data.success == true){
+                                        $.alert("你选择了“删除”");
+                                    }else {
+                                        $.alert("“删除失败”");
+                                    }
+                                })
 
-                                $.alert("你选择了“删除”");
                             },
                             onCancel: function () {
                                 $.alert("你选择了“取消”");

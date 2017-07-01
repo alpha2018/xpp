@@ -19,4 +19,13 @@ class Article extends BaseModel
     {
         return $query->where('user_id', '=', $user_id);
     }
+
+    public function scopeOfNotDeleted($query, $is = true)
+    {
+        if($is){
+            return $query->whereNull('deleted_at');
+        }else{
+            return $query->whereNotNull('deleted_at');
+        }
+    }
 }

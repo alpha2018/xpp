@@ -36,6 +36,7 @@ Route::any('test_rsa', function (){
 Route::group(['middleware'=>'auth'], function (){
     Route::any('people/article', 'Xpp\\PeopleArticleController@index');
     Route::any('people/article/{id}', 'Xpp\\PeopleArticleController@show');
+    Route::post('people/article/destroy/{id}', 'Xpp\\PeopleArticleController@destroy');
 });
 
 

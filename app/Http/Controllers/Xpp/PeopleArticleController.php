@@ -20,7 +20,7 @@ class PeopleArticleController extends Controller
 
     public function __construct(Article $article)
     {
-        $this->article = $article->ofType($this->articleTypeId);
+        $this->article = $article->ofType($this->articleTypeId)->ofNotDeleted();
 //        $this->middleware('auth', ['except'=>['show']]);
     }
 
@@ -82,5 +82,18 @@ class PeopleArticleController extends Controller
         }, $imageArr);
         $article->image_list = $imageList;
         return response()->json(['success' => true, 'result' => $article]);
+    }
+
+    public function destroy($id)
+    {
+        //
+        $article = $this->article->where('id', '=', $id)->first();
+        if (empty($article)) {
+            return response('404 Not Found', 404);
+        }
+        $article->deleted_at = time();
+        $article->save();
+
+        return response()->json(['success'=>true, 'result'=>$article->id]);
     }
 }
