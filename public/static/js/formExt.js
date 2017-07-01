@@ -1,6 +1,6 @@
-/*****************************************************************
- form表单获取值封装类
- *****************************************************************/
+/**
+ * form表单获取值封装类
+ */
 (function ($) {
     window.formExt = {};
     formExt.obj = function (form) {
@@ -53,7 +53,14 @@
                 'Authorization': 'Bearer ' + AuthExt.getToken()
             },
             success: function (result) {
-                func(result);
+                if (result == "Unauthorized") {
+                    clearLocalStorage();
+                    if (AuthExt.check()) {
+                        ajaxExt.get(url, func, options);
+                    }
+                } else {
+                    func(result);
+                }
             },
             error: function (xhr, type) {
                 $.toast("获取数据失败", 'cancel');
@@ -100,6 +107,7 @@
                 location.hash = '';
             }
         });
+        return true;
     }
     AuthExt.check = function () {
         console.log('登录验证');
@@ -148,22 +156,38 @@
         return key
     }
     // Operation LocalStorage
-    window.setLocalStorage = function(key, vaule) {
+    window.setLocalStorage = function (key, vaule) {
         return localStorage.setItem(key, JSON.stringify(vaule));
     }
 
-    window.getLocalStorage = function(key) {
+    window.getLocalStorage = function (key) {
         return JSON.parse(localStorage.getItem(key));
     }
 
-    window.clearLocalStorage = function(key) {
+    window.clearLocalStorage = function (key) {
         return localStorage.clear();
+    }
+
+    window.Utils = {};
+    Utils.GetUrlParams = function () {
+        var args = {};
+        var query = location.search.substring(1);//获取查询串
+        var pairs = query.split("&");//在逗号处断开
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf('=');//查找name=value
+            if (pos == -1)   continue;//如果没有找到就跳过
+            var argname = pairs[i].substring(0, pos);//提取name
+            var value = pairs[i].substring(pos + 1);//提取value
+            args[argname] = unescape(value);//存为属性
+        }
+        return args;
     }
 
 })(jQuery);
 (function ($) {
-    window.addEventListener('storage', function(e) {
+    window.addEventListener('storage', function (e) {
         console.log('storage change', e);
+
         // document.querySelector('.my-key').textContent = e.key;
         // document.querySelector('.my-old').textContent = e.oldValue;
         // document.querySelector('.my-new').textContent = e.newValue;
