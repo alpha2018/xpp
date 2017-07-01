@@ -95,7 +95,19 @@ class AuthUtils
      */
     public function check($token)
     {
-        $user = $this->JWTAuth->toUser($token);
+
+        try {
+            if(! $user = $this->JWTAuth->toUser($token)){
+                return false;
+            }
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return false;
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return false;
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return false;
+        }
+//        $user = $this->JWTAuth->toUser($token);
         $auth  = $this->getAuthCache($token);
         //todo ip和浏览器验证
         if(true){

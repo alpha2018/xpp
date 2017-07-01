@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>小爬爬少儿美术</title>
 
     <!-- head 中 -->
@@ -19,16 +18,17 @@
     <div class="weui-tab__bd" id="xpp_tab">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
             <div style="margin-bottom:53px">
-                <!--<div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000" >-->
-                    <!--<div class="swiper-wrapper" >-->
-                        <!--<div class="swiper-slide"><img src="/article/image/92/690" alt="" width="100%" ></div>-->
-                        <!--<div class="swiper-slide"><img src="/article/image/92/690" alt=""></div>-->
-                        <!--<div class="swiper-slide"><img src="/article/image/92/690" alt=""></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <header class='demos-header'>
-                    <h1 class="demos-title">Panel</h1>
-                </header>
+                <div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000" >
+                    <div class="swiper-wrapper" >
+                        <div class="swiper-slide"><img src="/static/images/0C827327-5C35-46CE-A6C9-A70A30EABAAB.png" alt="" width="100%" height="" ></div>
+                        <div class="swiper-slide"><img src="/static/images/0C827327-5C35-46CE-A6C9-A70A30EABAAB.png" alt="" width="100%" height="" ></div>
+                        <div class="swiper-slide"><img src="/static/images/0C827327-5C35-46CE-A6C9-A70A30EABAAB.png" alt="" width="100%" height=""></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <!--<header class='demos-header'>-->
+                    <!--<h1 class="demos-title">Panel</h1>-->
+                <!--</header>-->
                 <div class="page__bd">
                     <div class="weui-panel weui-panel_access">
                         <div class="weui-panel__hd">图文组合列表</div>
@@ -80,13 +80,14 @@
 
             <div class="weui-cells__title">未读数红点跟在主题信息后，统一在列表左侧</div>
             <div class="weui-cells">
-                <div class="weui-cell weui-cell_access">
+                <a class="weui-cell weui-cell_access" style="color: #151414;text-decoration: none;"
+                   href="/static/people/articles.html">
                     <div class="weui-cell__bd">
                         <span style="vertical-align: middle">文章列表</span>
                         <span class="weui-badge" style="margin-left: 5px;">8</span>
                     </div>
                     <div class="weui-cell__ft"></div>
-                </div>
+                </a>
                 <div class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <span style="vertical-align: middle">单行列表</span>
@@ -154,6 +155,11 @@
 <script>
     function initTab1(page) {
         var config = {
+            autoplay : 5000,
+            autoplayDisableOnInteraction : false,
+            speed:500,
+            grabCursor : true,
+            loop : true,
             pagination: '.swiper-pagination',
             paginationClickable: true
         };
@@ -227,11 +233,20 @@
                 $('#tab4').attr('style', '');
             }
         });
+
+        var xpp_tab1_init = false;
         $('#xpp_tab1').click(function () {
-            console.log($('#xpp_loadmore').attr('style'))
-            if($('#xpp_loadmore').attr('style') == undefined){
+            console.log(xpp_tab1_init);
+            if(xpp_tab1_init){
+//                console.log($('#xpp_loadmore').attr('style'))
+//                if($('#xpp_loadmore').attr('style') == undefined){
+//                    initTab1();
+//                }
+            }else {
                 initTab1();
+                xpp_tab1_init = true;
             }
+
         })
         $('.weui-tabbar__item').click(function () {
             location.hash = $(this).attr('href');

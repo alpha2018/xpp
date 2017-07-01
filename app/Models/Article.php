@@ -14,4 +14,9 @@ class Article extends BaseModel
     {
         return $query->where('status', '=', $status);
     }
+
+    public function scopeOfPeople($query, $user_id = null)
+    {
+        return $query->where('user_id', '=', $user_id);
+    }
 }

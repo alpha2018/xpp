@@ -79,7 +79,7 @@
                 //如果要查找参数key:
                 var articleId = args['article_id'];
                 console.log(articleId)
-                ajaxExt.get('/article/'+articleId, function (data) {
+                ajaxExt.get('/people/article/'+articleId, function (data) {
                     var result = data.result;
                     var html = '<h3>'+result.title+'</h3>'+
                     '<ul class="weui-media-box__info" style="margin-bottom: 10px">'+

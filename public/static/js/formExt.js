@@ -30,7 +30,7 @@
             //contentType: false,
             //processData: false,
             headers: {
-                'Authorization': 'Bearer '+$.cookie('token')
+                'Authorization': 'Bearer ' + AuthExt.getToken()
             },
             success: function (result) {
                 console.log("请求成功，JSON解析后的响应数据为:", result);
@@ -42,13 +42,16 @@
             }
         });
     }
-    ajaxExt.get = function (url, func) {
+    ajaxExt.get = function (url, func, options) {
         $.ajax({
             url: url,
             type: 'GET',
             //data: data,
             //contentType: false,
             //processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + AuthExt.getToken()
+            },
             success: function (result) {
                 func(result);
             },
@@ -151,6 +154,10 @@
 
     window.getLocalStorage = function(key) {
         return JSON.parse(localStorage.getItem(key));
+    }
+
+    window.clearLocalStorage = function(key) {
+        return localStorage.clear();
     }
 
 })(jQuery);

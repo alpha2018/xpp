@@ -33,4 +33,9 @@ Route::any('test_rsa', function (){
     config();
     app(\AlphaEyeRsa\Rsa\Rsa::class);
 });
+Route::group(['middleware'=>'auth'], function (){
+    Route::any('people/article', 'Xpp\\PeopleArticleController@index');
+    Route::any('people/article/{id}', 'Xpp\\PeopleArticleController@show');
+});
+
 
