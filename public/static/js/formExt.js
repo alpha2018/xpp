@@ -86,7 +86,7 @@
                         AuthExt.login();
                         $.toptip('账号密码错误', 'error');
                     } else {
-                        $.cookie('token', data.result.token, {expires: 7, path: '/'});
+                        AuthExt.setAuth(result);
                         console.log(data)
                     }
                 })
@@ -100,17 +100,68 @@
     }
     AuthExt.check = function () {
         console.log('登录验证');
-        var token = $.cookie('token');
+        var token = AuthExt.getToken();
         if (!token) {
             AuthExt.login()
         } else {
-            // if (func == undefined) {
-            //
-            // }else {
-            //     func();
-            // }
             return true;
         }
     }
+    AuthExt.setAuth = function (result) {
+        console.log('setAuth', result);
+        // $.cookie('token', result.token, {expires: 7, path: '/'});
+        setLocalStorage('token', result.token);
+    }
+    AuthExt.setToken = function (token) {
+
+    }
+    AuthExt.getToken = function () {
+        // var token = $.cookie('token');
+        var token = getLocalStorage('token');
+        console.log('getToken', token);
+        return token;
+    }
 })(jQuery);
+(function ($) {
+    window.config = {
+        name: 'Ant Design Admin',
+        prefix: 'antdAdmin',
+        footerText: 'Ant Design Admin 版权所有 © 2016 由 zuiidea 支持',
+        logoSrc: 'https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg',
+        logoText: 'Antd Admin',
+        needLogin: true
+    };
+    window.StorageExt = {};
+    StorageExt.put = function (name, defaultValue) {
+        var key = config.prefix + name
+        global[key] = localStorage.getItem(key)
+            ? JSON.parse(localStorage.getItem(key))
+            : defaultValue;
+
+        !localStorage.getItem(key) && localStorage.setItem(key, JSON.stringify(global[key]))
+        Watch.watch(global[key], function () {
+            localStorage.setItem(key, JSON.stringify(global[key]))
+        })
+        return key
+    }
+    // Operation LocalStorage
+    window.setLocalStorage = function(key, vaule) {
+        return localStorage.setItem(key, JSON.stringify(vaule));
+    }
+
+    window.getLocalStorage = function(key) {
+        return JSON.parse(localStorage.getItem(key));
+    }
+
+})(jQuery);
+(function ($) {
+    window.addEventListener('storage', function(e) {
+        console.log('storage change', e);
+        // document.querySelector('.my-key').textContent = e.key;
+        // document.querySelector('.my-old').textContent = e.oldValue;
+        // document.querySelector('.my-new').textContent = e.newValue;
+        // document.querySelector('.my-url').textContent = e.url;
+        // document.querySelector('.my-storage').textContent = e.storageArea;
+    });
+})(jQuery)
 

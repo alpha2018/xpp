@@ -42,6 +42,11 @@ class LoginController extends Controller
         }
 
         $token = app(AuthUtils::class)->setToken($user, $request);
+
+        session()->put('token', $token);
+
+//        dd(session()->get('token'));
+
         $result = ['user'=>[
             'avatar' => $user->avatar,
             'nickname' => $user->nickname,
