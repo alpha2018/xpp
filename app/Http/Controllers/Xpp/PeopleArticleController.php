@@ -131,4 +131,17 @@ class PeopleArticleController extends Controller
 
         return response()->json(['success'=>true, 'result'=>$article->id]);
     }
+
+    public function postPraise($id)
+    {
+        $article = $this->article->where('id', '=', $id)->first();
+        if (empty($article)) {
+            return response('404 Not Found', 404);
+        }
+    }
+
+    public function postCollection($id)
+    {
+
+    }
 }
