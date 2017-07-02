@@ -58,7 +58,13 @@
                 text: "发布",
                 className: "color-primary",
                 onClick: function () {
-                    $.alert("发布成功");
+                    ajaxExt.post('/people/article/set/public/'+articleId, {}, function (data) {
+                        if(data.success == true){
+                            $.alert("发布成功");
+                        }else {
+                            $.alert("操作失败");
+                        }
+                    });
                 }
             };
             var setPrivate =
@@ -66,7 +72,13 @@
                     text: "设为私密",
                     className: "color-primary",
                     onClick: function () {
-                        $.alert("发布成功");
+                        ajaxExt.post('/people/article/set/private/'+articleId, {}, function (data) {
+                            if(data.success == true){
+                                $.alert("操作成功");
+                            }else {
+                                $.alert("操作失败");
+                            }
+                        });
                     }
                 };
             var actions = [
@@ -93,7 +105,7 @@
                                     }else {
                                         $.alert("“删除失败”");
                                     }
-                                })
+                                });
 
                             },
                             onCancel: function () {

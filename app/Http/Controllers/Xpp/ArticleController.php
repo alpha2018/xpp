@@ -49,6 +49,7 @@ class ArticleController extends Controller
             } else {
                 $thumb = '/static/images/pic_160.png';
             }
+            $article->title = $article->stickTitle;
             $article->thumb = $thumb;
             $articleId = $article->id;
             $article->a_href = '/static/article.html?article_id=' . $articleId;
@@ -130,6 +131,7 @@ class ArticleController extends Controller
             $article->category_name = '无';
         }
         $images = $article->images;
+        $article->title = $article->stickTitle;
         $imageArr = array_values(array_filter(explode(',', $images)));
         $imageList = array_map(function ($v) {
             $v = '/article/image/' . $v . '/690';

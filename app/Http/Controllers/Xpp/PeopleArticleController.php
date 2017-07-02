@@ -37,7 +37,7 @@ class PeopleArticleController extends Controller
                 'stick', 'title', 'view_count', 'status'
             ]);
 
-        foreach ($articles as $article) {
+       foreach ($articles as $article) {
             $images = $article->images;
             $imageArr = explode(',', $images);
             $imageArr = array_values(array_filter($imageArr));
@@ -48,6 +48,8 @@ class PeopleArticleController extends Controller
             }
             $article->thumb = $thumb;
             $articleId = $article->id;
+            $article->title = $article->StatusTitle;
+
             $article->a_href = '/static/people/article.html?article_id=' . $articleId;
         }
         return $articles;
@@ -74,6 +76,7 @@ class PeopleArticleController extends Controller
         } else {
             $article->category_name = '无';
         }
+        $article->title = $article->statusTitle;
         $images = $article->images;
         $imageArr = array_values(array_filter(explode(',', $images)));
         $imageList = array_map(function ($v) {
@@ -91,7 +94,39 @@ class PeopleArticleController extends Controller
         if (empty($article)) {
             return response('404 Not Found', 404);
         }
+        if ($article->user_id != AuthUtils::user()->id){
+            return response()->json(['success'=>false, 'msg'=>'无权限操作']);
+        }
         $article->deleted_at = time();
+        $article->save();
+
+        return response()->json(['success'=>true, 'result'=>$article->id]);
+    }
+
+    public function postSetPublic($id)
+    {
+        $article = $this->article->where('id', '=', $id)->first();
+        if (empty($article)) {
+            return response('404 Not Found', 404);
+        }
+        if ($article->user_id != AuthUtils::user()->id){
+            return response()->json(['success'=>false, 'msg'=>'无权限操作']);
+        }
+        $article->status = 1;
+        $article->save();
+        return response()->json(['success'=>true, 'result'=>$article->id]);
+    }
+
+    public function postSetPrivate($id)
+    {
+        $article = $this->article->where('id', '=', $id)->first();
+        if (empty($article)) {
+            return response('404 Not Found', 404);
+        }
+        if ($article->user_id != AuthUtils::user()->id){
+            return response()->json(['success'=>false, 'msg'=>'无权限操作']);
+        }
+        $article->status = 0;
         $article->save();
 
         return response()->json(['success'=>true, 'result'=>$article->id]);

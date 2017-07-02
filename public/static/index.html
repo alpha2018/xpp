@@ -169,10 +169,9 @@
 
             console.log("请求成功，JSON解析后的响应数据为:", result);
             var data = result.data;
-            if (data.length == 0) {
+            if(result.last_page == result.current_page){
                 $('#tab1').destroyInfinite()
                 $('#xpp_loadmore').attr('style', 'display:none;');
-                return false;
             }
             for (var i = 0; i < data.length; i++) {
                 var html =

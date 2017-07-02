@@ -1,7 +1,23 @@
 <?php
-/**
- *
- */
+if(! function_exists('vTrue')){
+    function vTrue($result = 1)
+    {
+        return response()->json([
+            'success'=>true, 'result'=>$result, 'msg'=>1,
+            'status' => 200
+        ]);
+    }
+}
+if( !function_exists('vFalse')){
+    function vFalse($msg){
+        return response()->json([
+            'success'=>false, 'result'=>null, 'msg'=>$msg,
+            'status'=>500,
+        ]);
+    }
+}
+
+
 if(! function_exists('api_success_response')) {
     function api_success_response($result = null)
     {

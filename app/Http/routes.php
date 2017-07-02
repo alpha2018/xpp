@@ -37,6 +37,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::any('people/article', 'Xpp\\PeopleArticleController@index');
     Route::any('people/article/{id}', 'Xpp\\PeopleArticleController@show');
     Route::post('people/article/destroy/{id}', 'Xpp\\PeopleArticleController@destroy');
+    Route::post('people/article/set/public/{id}', 'Xpp\\PeopleArticleController@postSetPublic');
+    Route::post('people/article/set/private/{id}', 'Xpp\\PeopleArticleController@postSetPrivate');
 });
 
 
