@@ -23,7 +23,7 @@
         <a class="weui-navbar__item  weui-bar__item--on" href="javascript:void(0)">
             文章
         </a>
-        <a class="weui-navbar__item" href="javascript:void(0)">
+        <a class="weui-navbar__item" href="javascript:void(0)" id="xpp_article_operate">
             操作
             <!--<a href="#tab4" class="weui-tabbar__item" id="xpp_me">-->
                 <!--<div class="weui-tabbar__icon">-->
@@ -57,6 +57,51 @@
 
     <script>
         $(function () {
+            var isLogin = 1;
+
+            $(document).on("click", '#xpp_article_operate', function () {
+                var collection = {
+                    text: "收藏",
+                    className: "color-primary",
+                    onClick: function () {
+                        ajaxExt.post('/people/article/collection/'+articleId, {}, function (data) {
+                            if(data.success == true){
+                                $.alert("收藏成功");
+                            }else {
+                                $.alert("操作失败");
+                            }
+                        });
+                    }
+                };
+                var actions = [
+                    {
+                        text: "点赞",
+                        className: "color-warning",
+                        onClick: function () {
+                            ajaxExt.post('/people/article/praise/'+articleId, {}, function (data) {
+                                if(data.success == true){
+
+                                }else {
+
+                                }
+                            });
+                        }
+                    }
+                ];
+                if (isLogin == 1) {
+                    actions.push(collection);
+                }
+                var config = {};
+                $.actions({
+                    title: "",
+                    onClose: function () {
+                        console.log("close");
+                    },
+                    actions: actions
+                });
+            });
+
+
             function GetUrlParms()
             {
                 var args=new Object();
