@@ -29,9 +29,9 @@ class Article extends BaseModel
         }
     }
 
-    protected $publicAttr = '<i style="margin-left: 0.5em;border:1px solid rgba(158,217,157,1);font-size: 12px;color: rgba(158,217,157,1)">发布</i>';
-    protected $privateAttr = '<i style="margin-left: 0.5em;border:1px solid rgba(236,139,137,1);font-size: 12px;color: rgba(236,139,137,1)">私密</i>';
-    protected $stickAttr = '<i style="margin-left: 0.5em;border:1px solid rgba(236,139,137,1);font-size: 12px;color: rgba(236,139,137,1)">置顶</i>';
+    protected $publicAttr = '<font style="padding:0.2em; margin-left: 0.5em;border:1px solid rgba(158,217,157,1);font-size: 12px;color: rgba(158,217,157,1)">发布</font>';
+    protected $privateAttr = '<font style="padding:0.2em;margin-left: 0.5em;border:1px solid rgba(236,139,137,1);font-size: 12px;color: rgba(236,139,137,1)">私密</font>';
+    protected $stickAttr = '<font style="padding:0.2em;margin-left: 0.5em;border:1px solid rgba(236,139,137,1);font-size: 12px;color: rgba(236,139,137,1)">置顶</font>';
 
     public function getStatusTitleAttribute()
     {

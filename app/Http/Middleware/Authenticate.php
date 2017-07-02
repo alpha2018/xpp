@@ -35,8 +35,7 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        $token = app(JWTAuth::class)->getToken();
-        if (!$this->auth->check($token)) {
+        if (!$this->auth->check()) {
             if ($request->ajax()) {
                 return response()->json('Unauthorized');
                 return response('Unauthorized.', 401);

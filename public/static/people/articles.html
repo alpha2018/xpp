@@ -118,7 +118,10 @@
             console.log("请求成功，JSON解析后的响应数据为:", result);
             var data = result.data;
             if(result.last_page == result.current_page){
-                $('#tab1').destroyInfinite()
+                $('#tab1').destroyInfinite();
+                $('#xpp_loadmore').attr('style', 'display:none;');
+            }else if (result.last_page == 0){
+                $('#tab1').destroyInfinite();
                 $('#xpp_loadmore').attr('style', 'display:none;');
             }
 

@@ -93,10 +93,11 @@ class AuthUtils
      * @param $token
      * @return bool
      */
-    public function check($token)
+    public function check()
     {
 
         try {
+            $token = app(JWTAuth::class)->getToken() ? app(JWTAuth::class)->getToken(): session()->get('token');
             if(! $user = $this->JWTAuth->toUser($token)){
                 return false;
             }
