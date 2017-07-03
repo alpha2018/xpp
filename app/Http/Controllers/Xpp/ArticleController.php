@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Xpp;
 
+use AlphaEyeCore\Utils\AuthUtils;
 use App\Models\Article;
 use App\Models\File;
 use Illuminate\Database\QueryException;
@@ -75,6 +76,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $userId = AuthUtils::user()->uid;
         $status = $request->input('status', 0);
         if ($status == 'on' || $status == 'On') {
             $status = 1;
@@ -93,6 +95,7 @@ class ArticleController extends Controller
         }
         try {
             $article = new Article();
+            $article->user_id = $userId;
             $article->title = $title;
             $article->slug = md5($images . $title . $description . $this->articleTypeId);
             $article->description = $description;

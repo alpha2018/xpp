@@ -14,32 +14,6 @@
 
 </head>
 <body id="app-layout" ontouchstart>
-<!--<div class="weui-tab">-->
-    <!--<div class="weui-navbar">-->
-        <!--<a class="weui-navbar__item" href="javascript:window.history.back();">-->
-            <!--返回-->
-        <!--</a>-->
-        <!--<a class="weui-navbar__item  weui-bar__item&#45;&#45;on" href="javascript:void(0)">-->
-            <!--文章-->
-        <!--</a>-->
-        <!--<a class="weui-navbar__item" href="javascript:void(0)">-->
-            <!--操作-->
-            <!--&lt;!&ndash;<a href="#tab4" class="weui-tabbar__item" id="xpp_me">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="weui-tabbar__icon">&ndash;&gt;-->
-            <!--&lt;!&ndash;<img src="./images/icon_nav_cell.png" alt="">&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<p class="weui-tabbar__label">我</p>&ndash;&gt;-->
-            <!--&lt;!&ndash;</a>&ndash;&gt;-->
-        <!--</a>-->
-    <!--</div>-->
-    <!--<div class="weui-tab__bd ">-->
-        <!--<div id="" class="weui-tab__bd-item weui-tab__bd-item&#45;&#45;active">-->
-            <!--<article class="weui-article" id="xpp_article_content">-->
-
-            <!--</article>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <div class="weui-tab">
     <div class="weui-tab__bd" id="xpp_tab">
 
@@ -123,6 +97,7 @@
             }else if (result.last_page == 0){
                 $('#tab1').destroyInfinite();
                 $('#xpp_loadmore').attr('style', 'display:none;');
+                $('#xpp_loadmore_none').attr('style', '');
             }
 
             for (var i = 0; i < data.length; i++) {

@@ -2,6 +2,7 @@
 use AlphaEyeCore\Utils\AuthUtils;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Praise;
 
 /**
  * Created by PhpStorm.
@@ -138,6 +139,36 @@ class PeopleArticleController extends Controller
         if (empty($article)) {
             return response('404 Not Found', 404);
         }
+
+        $praise = app(Praise::class)->where('article_id', '=', $id);
+        try{
+            $user = AuthUtils::user();
+        }catch (\Exception $e){
+
+        }
+
+
+        if(!empty($user)){
+            $userId = $user->id;
+            $praise = $praise->where('user_id', '=', $userId);
+            $unique = '';
+        }else{
+            $userId = 0;
+            $unique = md5(request()->getClientIp().request()->header('user-agent'));
+            $praise = $praise->where('unique', '=', $unique);
+        }
+        $praise = $praise->first();
+        $praiseId = 0;
+        if(empty($praise)){
+            $praise = app(Praise::class);
+            $praise->article_id = $id;
+            $praise->user_id = $userId;
+            $praise->unique = $unique;
+            $praise->save();
+            $praiseId = $praise->id;
+        }
+
+        return response()->json(['success'=>true, 'result'=>$praiseId]);
     }
 
     public function postCollection($id)

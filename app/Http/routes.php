@@ -40,5 +40,5 @@ Route::group(['middleware'=>'auth'], function (){
     Route::post('people/article/set/public/{id}', 'Xpp\\PeopleArticleController@postSetPublic');
     Route::post('people/article/set/private/{id}', 'Xpp\\PeopleArticleController@postSetPrivate');
 });
-
+Route::post('people/article/praise/{id}', 'Xpp\\PeopleArticleController@postPraise');
 
