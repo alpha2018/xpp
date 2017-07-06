@@ -52,4 +52,8 @@ $app->singleton(
 |
 */
 
+//$app->configureMonologUsing(function($monolog) {
+//    $monolog->pushHandler(\Monolog\Handler\HandlerInterface);
+//});
+
 return $app;
