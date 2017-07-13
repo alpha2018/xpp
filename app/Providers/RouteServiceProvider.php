@@ -40,8 +40,8 @@ class RouteServiceProvider extends ServiceProvider
         $router->group(['namespace' => $this->namespace], function ($router) {
             require app_path('Http/routes.php');
         });
-//        $router->group(['namespace' => $this->namespace, 'prefix'=>'wx'], function ($router) {
-//            require app_path('Http/wx.php');
-//        });
+        $router->group(['namespace' => $this->namespace, 'prefix'=>'wx'], function ($router) {
+            require app_path('Http/wx.php');
+        });
     }
 }
