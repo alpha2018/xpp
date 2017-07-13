@@ -21,7 +21,7 @@ class WechatController extends Controller
     {
         $app = new Application($this->options);
 
-
-        dd($app);
+        $response = $app->server->serve();
+        return $response;
     }
 }
