@@ -10,7 +10,7 @@ return [
     /**
      * 账号基本信息，请从微信公众平台/开放平台获取
      */
-    'app_id'  => 'your-app-id',         // AppID
+    'app_id'  => 'wxfec06405da3da1a8',         // AppID
     'secret'  => 'd05665a947a7a409852922cb0d8b11c6',     // AppSecret
     'token'   => 'de30f4ed64a614089b1ecb0a6f039ac3',          // Token
     'aes_key' => '86hrRBaLiWzgKoLMhws9OCwM0dyz16jDrXPWFX5Wdi6',                    // EncodingAESKey，安全模式下请一定要填写！！！
