@@ -8,3 +8,6 @@
 
 
 Route::any('/', 'Wx\\WechatController@wx');
+Route::any('/redirect_uri', function (){
+    dd(request());
+});
