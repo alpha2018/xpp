@@ -33,6 +33,12 @@ class LoginController extends Controller
 
         $password = app(Rsa::class)->decodePublicKeyEncode($password);
 
+//        $newUser = new User();
+//        $newUser->name = 'admin';
+//        $newUser->password = Hash::make('admin');
+//        $newUser->email = 'davinciandalien@aliyun.com';
+//        $newUser->save();
+
         $user = $this->user->where('name', '=', $username)->first();
         if(empty($user)){
             return response()->json(['success'=>false, 'result'=>null, 'msg'=>'账号或密码错误']);

@@ -233,19 +233,10 @@
             }
         });
 
-        var xpp_tab1_init = false;
         $('#xpp_tab1').click(function () {
-            console.log(xpp_tab1_init);
-            if(xpp_tab1_init){
-//                console.log($('#xpp_loadmore').attr('style'))
-//                if($('#xpp_loadmore').attr('style') == undefined){
-//                    initTab1();
-//                }
-            }else {
+            if($('#xpp_article_list').children().length == 0){
                 initTab1();
-                xpp_tab1_init = true;
             }
-
         })
         $('.weui-tabbar__item').click(function () {
             location.hash = $(this).attr('href');
@@ -262,6 +253,7 @@
                 default :
                     initTab1();
                     location.hash = ''
+                    console.log()
                     break;
             }
         }
