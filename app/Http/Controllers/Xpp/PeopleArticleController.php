@@ -1,5 +1,5 @@
 <?php namespace App\Http\Controllers\Xpp;
-use AlphaEyeCore\Utils\AuthUtils;
+use AlphaCore\Utils\AuthUtils;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Praise;

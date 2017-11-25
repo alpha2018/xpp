@@ -25,8 +25,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "AlphaEyeCore\\": "alphaeye/core/src",
-            "AlphaEyeRsa\\": "alphaeye/rsa/src"
+            "AlphaCore\\": "alpha2018/core/src",
+            "AlphaRsa\\": "alpha2018/rsa/src"
         }
     },
     "autoload-dev": {

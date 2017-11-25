@@ -1,4 +1,4 @@
-<?php namespace AlphaEyeRsa\Rsa;
+<?php namespace AlphaRsa\Rsa;
 /**
  * Created by PhpStorm.
  * User: leo

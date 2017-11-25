@@ -1,6 +1,6 @@
 <?php
 
-namespace AlphaEyeCore\LProviders;
+namespace AlphaCore\LProviders;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $router->group(['namespace' => 'Blog\Http\Controllers'], function ($router) {
-            require base_path().('/alphaeye/src/Blog/Http/routes.php');
+            require base_path().('/alpha2018/src/Blog/Http/routes.php');
         });
     }
 }

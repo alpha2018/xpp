@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Xpp;
 
-use AlphaEyeCore\Utils\AuthUtils;
+use AlphaCore\Utils\AuthUtils;
 use App\Models\Article;
 use App\Models\File;
 use Illuminate\Database\QueryException;

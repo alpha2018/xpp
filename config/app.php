@@ -151,7 +151,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        \AlphaEyeCore\LHttp\LProviders\CoreServiceProvider::class,
+        \AlphaCore\LHttp\LProviders\CoreServiceProvider::class,
     ],
 
     /*

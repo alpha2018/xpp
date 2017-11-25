@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
-use AlphaEyeCore\Utils\AuthUtils;
-use AlphaEyeRsa\Rsa\Rsa;
+use AlphaCore\Utils\AuthUtils;
+use AlphaRsa\Rsa\Rsa;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;

@@ -1,4 +1,4 @@
-<?php namespace AlphaEyeCore\Utils;
+<?php namespace AlphaCore\Utils;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\JWTAuth;

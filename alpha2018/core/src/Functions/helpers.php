@@ -86,7 +86,7 @@ if (!function_exists('api_path')){
 if (!function_exists('web_path')){
     function web_path($path = '')
     {
-        return base_path('alphaeye/src/Web').($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return base_path('alpha2018/src/Web').($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
 

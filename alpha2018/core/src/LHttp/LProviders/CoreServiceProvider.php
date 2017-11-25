@@ -1,4 +1,4 @@
-<?php namespace AlphaEyeCore\LHttp\LProviders;
+<?php namespace AlphaCore\LHttp\LProviders;
 
 use Illuminate\Support\ServiceProvider;
 

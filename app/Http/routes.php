@@ -17,7 +17,7 @@ Route::get('/', function (){
 
 //Route::get('/test', function (){
 //    $user = app(\App\Models\User::class)->find(1);
-//    $token = app(\AlphaEyeCore\Utils\AuthUtils::class)->setToken($user, request());
+//    $token = app(\AlphaCore\Utils\AuthUtils::class)->setToken($user, request());
 //    dd($user, $token);
 //});
 Route::any('auth/login', 'Auth\\LoginController@postLogin');
@@ -31,7 +31,7 @@ Route::resource('article', 'Xpp\\ArticleController');
 
 Route::any('test_rsa', function (){
     config();
-    app(\AlphaEyeRsa\Rsa\Rsa::class);
+    app(\AlphaRsa\Rsa\Rsa::class);
 });
 Route::group(['middleware'=>'auth'], function (){
     Route::any('people/article', 'Xpp\\PeopleArticleController@index');

@@ -51,6 +51,6 @@ return array(
     'ClassPreloader\\' => array($vendorDir . '/classpreloader/classpreloader/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'App\\' => array($baseDir . '/app'),
-    'AlphaEyeRsa\\' => array($baseDir . '/alphaeye/rsa/src'),
-    'AlphaEyeCore\\' => array($baseDir . '/alphaeye/core/src'),
+    'AlphaRsa\\' => array($baseDir . '/alpha2018/rsa/src'),
+    'AlphaCore\\' => array($baseDir . '/alpha2018/core/src'),
 );

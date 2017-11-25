@@ -1,4 +1,4 @@
-<?php namespace AlphaEye\ApiAuth;
+<?php namespace Alpha\ApiAuth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**

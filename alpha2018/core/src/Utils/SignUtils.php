@@ -1,4 +1,4 @@
-<?php namespace AlphaEyeUtils;
+<?php namespace AlphaUtils;
 /**
  * Created by PhpStorm.
  * User: leo

@@ -1,4 +1,4 @@
-<?php namespace AlphaEyeCore;
+<?php namespace AlphaCore;
 /**
  * Created by PhpStorm.
  * User: leo

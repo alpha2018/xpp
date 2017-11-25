@@ -1,4 +1,4 @@
-<?php namespace AlphaEyeCore\LHttp\LMiddleware;
+<?php namespace AlphaCore\LHttp\LMiddleware;
 use App\Models\AccessLog;
 
 /**

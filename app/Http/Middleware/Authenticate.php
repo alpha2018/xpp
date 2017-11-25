@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use AlphaEyeCore\Utils\AuthUtils;
+use AlphaCore\Utils\AuthUtils;
 use Closure;
 use Tymon\JWTAuth\JWTAuth;
 
