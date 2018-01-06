@@ -87,6 +87,7 @@
                 WKJQVJwVxXSw/U2qhwIDAQAB\
                 -----END PUBLIC KEY-----';
                 // Encrypt with the public key...
+                // require jsencrypt.min.js
                 var encrypt = new JSEncrypt();
                 encrypt.setPublicKey(publicKey);
                 password = encrypt.encrypt(password);
